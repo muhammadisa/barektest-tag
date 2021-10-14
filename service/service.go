@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 	_repointerface "github.com/muhammadisa/barektest-tag/repository"
 	_interface "github.com/muhammadisa/barektest-tag/service/interface"
@@ -16,20 +17,45 @@ type service struct {
 	repo   _repointerface.Repository
 }
 
-func (s service) AddTag(ctx context.Context, tag *pb.Tag) (*emptypb.Empty, error) {
+func (s service) AddTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
 	return nil, s.repo.ReadWriter.WriteTag(ctx, tag)
 }
 
-func (s service) EditTag(ctx context.Context, tag *pb.Tag) (*emptypb.Empty, error) {
+func (s service) EditTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
 	return nil, s.repo.ReadWriter.ModifyTag(ctx, tag)
 }
 
-func (s service) DeleteTag(ctx context.Context, selectTag *pb.SelectTag) (*emptypb.Empty, error) {
-	return nil, s.repo.ReadWriter.RemoveTag(ctx, selectTag)
+func (s service) DeleteTag(ctx context.Context, selectTag *pb.SelectTag) (res *emptypb.Empty, err error) {
+	err = s.repo.ReadWriter.RemoveTag(ctx, selectTag)
+	if err != nil {
+		return nil, err
+	}
+	err = s.repo.CacheReadWriter.UnsetTag(ctx, selectTag.Id)
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
 }
 
-func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (*pb.Tags, error) {
-	return s.repo.ReadWriter.ReadTags(ctx)
+func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (res *pb.Tags, err error) {
+	res, err = s.repo.CacheReadWriter.GetTags(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if len(res.Tags) == 0 {
+		fmt.Println("from database")
+		res, err = s.repo.ReadWriter.ReadTags(ctx)
+		if err != nil {
+			return nil, err
+		}
+		err = s.repo.CacheReadWriter.ReloadTags(ctx, res)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
+	}
+	fmt.Println("from cache")
+	return res, nil
 }
 
 func NewUsecases(repo _repointerface.Repository, tracer trace.Tracer, vault vlt.VLT) _interface.Service {

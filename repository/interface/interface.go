@@ -11,3 +11,17 @@ type ReadWrite interface {
 	RemoveTag(ctx context.Context, req *pb.SelectTag) error
 	ReadTags(ctx context.Context) (*pb.Tags, error)
 }
+
+/**
+map[string]interface
+{
+	"tag_uuid": tag_detail
+}
+*/
+
+type Cache interface {
+	SetTag(ctx context.Context, id, tag string) error
+	UnsetTag(ctx context.Context, id string) error
+	GetTags(ctx context.Context) (*pb.Tags, error)
+	ReloadTags(ctx context.Context, tags *pb.Tags) error
+}

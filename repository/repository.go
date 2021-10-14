@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"github.com/muhammadisa/barektest-tag/repository/cache"
 	_interface "github.com/muhammadisa/barektest-tag/repository/interface"
 	"github.com/muhammadisa/barektest-tag/repository/sql"
 	"github.com/muhammadisa/barektest-util/dbc"
@@ -9,11 +10,13 @@ import (
 )
 
 type Repository struct {
-	ReadWriter _interface.ReadWrite
+	ReadWriter      _interface.ReadWrite
+	CacheReadWriter _interface.Cache
 }
 
 type RepoConf struct {
 	SQL dbc.Config
+	Cache dbc.Config
 }
 
 func NewRepository(ctx context.Context, rc RepoConf, tracer trace.Tracer) (*Repository, error) {
@@ -21,7 +24,12 @@ func NewRepository(ctx context.Context, rc RepoConf, tracer trace.Tracer) (*Repo
 	if err != nil {
 		return nil, err
 	}
+	cacheReadWriter, err := cache.NewCache(rc.Cache, tracer)
+	if err != nil {
+		return nil, err
+	}
 	return &Repository{
-		ReadWriter: readWriter,
+		ReadWriter:      readWriter,
+		CacheReadWriter: cacheReadWriter,
 	}, nil
 }

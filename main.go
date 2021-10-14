@@ -107,6 +107,13 @@ func main() {
 			Port:     vault.Get("/sql_database:port"),
 			Name:     vault.Get("/sql_database:db"),
 		}
+		repoConf.Cache = dbc.Config{
+			Username: "",
+			Password: "95798588",
+			Host:     "localhost",
+			Port:     "6379",
+			Name:     "",
+		}
 	}
 
 	tagRepo, err := repository.NewRepository(ctx, repoConf, trcr)
