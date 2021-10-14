@@ -11,6 +11,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"go.opencensus.io/trace"
 	"sync"
+	"time"
 )
 
 var mutex = &sync.RWMutex{}
@@ -20,49 +21,54 @@ type readWrite struct {
 	db     *sql.DB
 }
 
-func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (err error) {
+func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
 	const query = `
-	INSERT INTO tags(id, tag) VALUES (?,?)
+	INSERT INTO tags(id, tag, created_at, updated_at) VALUES (?,?,?,?)
 	`
+	currentTime := time.Now()
 	req.Id = uuid.NewV4().String()
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
-		return err
+		return res, err
 	}
 	result, err := stmt.ExecContext(
 		ctx,
-		req.Id,  // id
-		req.Tag, // tag
+		req.Id,      // id
+		req.Tag,     // tag
+		currentTime, // created_at
+		currentTime, // updated_at
 	)
 	if err != nil {
-		return err
+		return res, err
 	}
 	if affected, err := result.RowsAffected(); affected == 0 || err != nil {
-		return fmt.Errorf("failed to insert reason : %+v", err)
+		return res, fmt.Errorf("failed to insert reason : %+v", err)
 	}
-	return nil
+	return req, nil
 }
 
-func (r *readWrite) ModifyTag(ctx context.Context, req *pb.Tag) (err error) {
+func (r *readWrite) ModifyTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
 	const query = `
-	UPDATE tags SET tag = ? WHERE id = ?
+	UPDATE tags SET tag = ?, updated_at = ? WHERE id = ?
 	`
+	currentTime := time.Now()
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
-		return err
+		return res, err
 	}
 	result, err := stmt.ExecContext(
 		ctx,
-		req.Tag, // tag
-		req.Id,  // id
+		req.Tag,     // tag
+		currentTime, // updated_at
+		req.Id,      // id
 	)
 	if err != nil {
-		return err
+		return res, err
 	}
 	if affected, err := result.RowsAffected(); affected == 0 || err != nil {
-		return fmt.Errorf("failed to insert reason : %+v", err)
+		return res, fmt.Errorf("failed to insert reason : %+v", err)
 	}
-	return nil
+	return req, nil
 }
 
 func (r *readWrite) RemoveTag(ctx context.Context, req *pb.SelectTag) (err error) {

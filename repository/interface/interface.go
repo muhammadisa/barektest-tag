@@ -6,8 +6,8 @@ import (
 )
 
 type ReadWrite interface {
-	WriteTag(ctx context.Context, req *pb.Tag) error
-	ModifyTag(ctx context.Context, req *pb.Tag) error
+	WriteTag(ctx context.Context, req *pb.Tag) (*pb.Tag, error)
+	ModifyTag(ctx context.Context, req *pb.Tag) (*pb.Tag, error)
 	RemoveTag(ctx context.Context, req *pb.SelectTag) error
 	ReadTags(ctx context.Context) (*pb.Tags, error)
 }
@@ -20,7 +20,7 @@ map[string]interface
 */
 
 type Cache interface {
-	SetTag(ctx context.Context, id, tag string) error
+	SetTag(ctx context.Context, tag *pb.Tag) error
 	UnsetTag(ctx context.Context, id string) error
 	GetTags(ctx context.Context) (*pb.Tags, error)
 	ReloadTags(ctx context.Context, tags *pb.Tags) error

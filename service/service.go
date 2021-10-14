@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 	_repointerface "github.com/muhammadisa/barektest-tag/repository"
 	_interface "github.com/muhammadisa/barektest-tag/service/interface"
@@ -18,11 +17,19 @@ type service struct {
 }
 
 func (s service) AddTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
-	return nil, s.repo.ReadWriter.WriteTag(ctx, tag)
+	newTag, err := s.repo.ReadWriter.WriteTag(ctx, tag)
+	if err != nil {
+		return nil, err
+	}
+	return nil, s.repo.CacheReadWriter.SetTag(ctx, newTag)
 }
 
 func (s service) EditTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
-	return nil, s.repo.ReadWriter.ModifyTag(ctx, tag)
+	updatedTag, err := s.repo.ReadWriter.ModifyTag(ctx, tag)
+	if err != nil {
+		return nil, err
+	}
+	return nil, s.repo.CacheReadWriter.SetTag(ctx, updatedTag)
 }
 
 func (s service) DeleteTag(ctx context.Context, selectTag *pb.SelectTag) (res *emptypb.Empty, err error) {
@@ -43,7 +50,6 @@ func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (res *pb.Tags, e
 		return nil, err
 	}
 	if len(res.Tags) == 0 {
-		fmt.Println("from database")
 		res, err = s.repo.ReadWriter.ReadTags(ctx)
 		if err != nil {
 			return nil, err
@@ -54,7 +60,6 @@ func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (res *pb.Tags, e
 		}
 		return res, nil
 	}
-	fmt.Println("from cache")
 	return res, nil
 }
 

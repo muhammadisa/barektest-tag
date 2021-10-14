@@ -32,9 +32,12 @@ func (c *cache) UnsetTag(ctx context.Context, id string) (err error) {
 	return c.redis.HDel(ctx, "tags", id).Err()
 }
 
-func (c *cache) SetTag(ctx context.Context, id string, tags string) (err error) {
-	c.redis.HSetNX(ctx, "tags", id, tags)
-	panic("implement me")
+func (c *cache) SetTag(ctx context.Context, tag *pb.Tag) (err error) {
+	tagByte, err := json.Marshal(tag)
+	if err != nil {
+		return err
+	}
+	return c.redis.HSetNX(ctx, "tags", tag.Id, string(tagByte)).Err()
 }
 
 func (c *cache) GetTags(ctx context.Context) (res *pb.Tags, err error) {
