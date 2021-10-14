@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package api.v1;
+option go_package = "gitlab.com/muhammadisa/barektest-tag/protoc/api/v1/";
+
+message Tag {
+  string id = 1;
+  string title = 2;
+  int64 created_at = 3;
+  int64 updated_at = 4;
+}
+
+message SelectTag {
+  string id = 1;
+}
+
+message Tags {
+  repeated Tag tags = 1;
+}
+
+service TagService {
+  rpc AddTag(Tag) returns (google.protobuf.Empty);
+  rpc EditTag(Tag) returns (google.protobuf.Empty);
+  rpc DeleteTag(SelectTag) returns (google.protobuf.Empty);
+  rpc GetTags(google.protobuf.Empty) returns (Tags);
+}

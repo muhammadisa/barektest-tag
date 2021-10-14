@@ -1,0 +1,14 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: api.v1.TagService.AddTag
+      post: /v1/tag
+      body: "*"
+    - selector: api.v1.TagService.EditTag
+      put: /v1/tag/{id}
+      body: "*"
+    - selector: api.v1.TagService.DeleteTag
+      delete: /v1/tag/{id}
+    - selector: api.v1.TagService.GetTags
+      get: /v1/tags
