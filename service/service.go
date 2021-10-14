@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 	_repointerface "github.com/muhammadisa/barektest-tag/repository"
 	_interface "github.com/muhammadisa/barektest-tag/service/interface"
@@ -54,6 +55,7 @@ func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (res *pb.Tags, e
 		return nil, err
 	}
 	if len(res.Tags) == 0 {
+		fmt.Println("from database")
 		res, err = s.repo.ReadWriter.ReadTags(ctx)
 		if err != nil {
 			return nil, err
@@ -64,6 +66,7 @@ func (s service) GetTags(ctx context.Context, _ *emptypb.Empty) (res *pb.Tags, e
 		}
 		return res, nil
 	}
+	fmt.Println("from cache")
 	return res, nil
 }
 

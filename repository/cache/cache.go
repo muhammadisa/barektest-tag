@@ -3,11 +3,13 @@ package cache
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/go-redis/redis/v8"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 	_interface "github.com/muhammadisa/barektest-tag/repository/interface"
 	"github.com/muhammadisa/barektest-util/dbc"
 	"go.opencensus.io/trace"
+	"time"
 )
 
 type cache struct {
@@ -24,8 +26,12 @@ func (c *cache) ReloadTags(ctx context.Context, tags *pb.Tags) (err error) {
 		}
 		data[tag.Id] = string(tagByte)
 	}
-	c.redis.HMSet(ctx, "tags", data)
-	return nil
+	ok, err := c.redis.Expire(ctx, "tags", 10 * time.Second).Result()
+	if err != nil {
+		return err
+	}
+	fmt.Println(ok)
+	return c.redis.HMSet(ctx, "tags", data).Err()
 }
 
 func (c *cache) UnsetTag(ctx context.Context, id string) (err error) {
