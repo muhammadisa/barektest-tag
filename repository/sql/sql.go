@@ -27,6 +27,8 @@ func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err
 	`
 	currentTime := time.Now()
 	req.Id = uuid.NewV4().String()
+	req.CreatedAt = currentTime.Unix()
+	req.UpdatedAt = currentTime.Unix()
 	stmt, err := r.db.Prepare(query)
 	if err != nil {
 		return res, err
@@ -48,19 +50,42 @@ func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err
 }
 
 func (r *readWrite) ModifyTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
+	var oldTag model.Tag
+	const queryLookupExisting = `
+	SELECT id, tag, created_at, updated_at FROM tags WHERE id = ? 
+	`
+	stmt, err := r.db.Prepare(queryLookupExisting)
+	if err != nil {
+		return res, err
+	}
+	row := stmt.QueryRow(req.Id)
+	err = row.Scan(
+		&oldTag.ID,      // id
+		&oldTag.Tag,     // tag
+		&oldTag.Created, // created_at
+		&oldTag.Updated, // updated_at
+	)
+	if err != nil || err == sql.ErrNoRows {
+		return res, err
+	}
+	oldTag.UseUnixTimeStamp()
+
 	const query = `
-	UPDATE tags SET tag = ?, updated_at = ? WHERE id = ?
+	UPDATE tags SET tag = ?, created_at = ?, updated_at = ? WHERE id = ?
 	`
 	currentTime := time.Now()
-	stmt, err := r.db.Prepare(query)
+	req.CreatedAt = oldTag.CreatedAt
+	req.UpdatedAt = currentTime.Unix()
+	stmt, err = r.db.Prepare(query)
 	if err != nil {
 		return res, err
 	}
 	result, err := stmt.ExecContext(
 		ctx,
-		req.Tag,     // tag
-		currentTime, // updated_at
-		req.Id,      // id
+		req.Tag,        // tag
+		oldTag.Created, // created_at
+		currentTime,    // updated_at
+		req.Id,         // id
 	)
 	if err != nil {
 		return res, err

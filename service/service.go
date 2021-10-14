@@ -25,6 +25,10 @@ func (s service) AddTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, e
 }
 
 func (s service) EditTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
+	err = s.repo.CacheReadWriter.UnsetTag(ctx, tag.Id)
+	if err != nil {
+		return nil, err
+	}
 	updatedTag, err := s.repo.ReadWriter.ModifyTag(ctx, tag)
 	if err != nil {
 		return nil, err
