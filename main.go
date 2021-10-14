@@ -7,9 +7,14 @@ import (
 	"github.com/go-kit/kit/log/level"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/muhammadisa/barektest-tag/constant"
+	ep "github.com/muhammadisa/barektest-tag/endpoint"
 	"github.com/muhammadisa/barektest-tag/gvars"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
+	"github.com/muhammadisa/barektest-tag/repository"
+	"github.com/muhammadisa/barektest-tag/service"
+	"github.com/muhammadisa/barektest-tag/transport"
 	"github.com/muhammadisa/barektest-util/cb"
+	"github.com/muhammadisa/barektest-util/dbc"
 	"github.com/muhammadisa/barektest-util/hdr"
 	"github.com/muhammadisa/barektest-util/lgr"
 	"github.com/muhammadisa/barektest-util/vlt"
@@ -53,7 +58,7 @@ func ServeHTTP(listener net.Listener, service pb.TagServiceServer) error {
 
 // MergeServer start ServeGRPC and ServeHTTP concurrently
 func MergeServer(service pb.TagServiceServer, serverOptions []grpc.ServerOption) {
-	port := fmt.Sprintf(":%s", "50013")
+	port := fmt.Sprintf(":%s", "8010")
 	listener, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatal(err)
@@ -87,16 +92,40 @@ func main() {
 	}
 
 	reporter := httpreporter.NewReporter(vault.Get("/tracer_conf:url"))
-	localEndpoint, _ := zipkin.NewEndpoint(constant.ServiceName, "http://gcp-nb-sbox01:0")
+	localEndpoint, _ := zipkin.NewEndpoint(constant.ServiceName, ":0")
 	exporter := oczipkin.NewExporter(reporter, localEndpoint)
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
 	trace.RegisterExporter(exporter)
 	trcr := trace.DefaultTracer
+
+	var repoConf repository.RepoConf
+	{
+		repoConf.SQL = dbc.Config{
+			Username: vault.Get("/sql_database:username"),
+			Password: vault.Get("/sql_database:password"),
+			Host:     vault.Get("/sql_database:host"),
+			Port:     vault.Get("/sql_database:port"),
+			Name:     vault.Get("/sql_database:db"),
+		}
+	}
+
+	tagRepo, err := repository.NewRepository(ctx, repoConf, trcr)
+	if err != nil {
+		panic(err)
+	}
 
 	err = cb.StartHystrix(10, constant.ServiceName)
 	if err != nil {
 		panic(err)
 	}
 
+	tagSvc := service.NewUsecases(*tagRepo, trcr, vault)
 
+	tagEp, err := ep.NewTagEndpoint(tagSvc, gvars.Log, vault)
+	if err != nil {
+		panic(err)
+	}
+
+	server := transport.NewTagServer(tagEp)
+	MergeServer(server, nil)
 }

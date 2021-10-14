@@ -16,7 +16,7 @@ type RepoConf struct {
 	SQL dbc.Config
 }
 
-func NewRepositories(ctx context.Context, rc RepoConf, tracer trace.Tracer) (*Repository, error) {
+func NewRepository(ctx context.Context, rc RepoConf, tracer trace.Tracer) (*Repository, error) {
 	readWriter, err := sql.NewSQL(rc.SQL, tracer)
 	if err != nil {
 		return nil, err

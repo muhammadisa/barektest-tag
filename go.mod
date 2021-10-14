@@ -8,6 +8,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0
 	github.com/muhammadisa/barektest-util v0.0.0-20211014154241-8233c4666cba
 	github.com/openzipkin/zipkin-go v0.2.5
+	github.com/satori/go.uuid v1.2.0
 	github.com/soheilhy/cmux v0.1.5
 	go.opencensus.io v0.23.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c

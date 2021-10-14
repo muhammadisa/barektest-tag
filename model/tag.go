@@ -4,7 +4,7 @@ import "time"
 
 type Tag struct {
 	ID               string
-	Title            string
+	Tag              string
 	CreatedAt        int64
 	UpdatedAt        int64
 	Created, Updated time.Time

@@ -53,7 +53,7 @@
         "id": {
           "type": "string"
         },
-        "title": {
+        "tag": {
           "type": "string"
         },
         "createdAt": {
