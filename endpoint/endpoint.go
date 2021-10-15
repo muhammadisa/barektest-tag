@@ -11,10 +11,14 @@ import (
 )
 
 type TagEndpoint struct {
-	AddTagEndpoint    endpoint.Endpoint
-	EditTagEndpoint   endpoint.Endpoint
-	DeleteTagEndpoint endpoint.Endpoint
-	GetTagsEndpoint   endpoint.Endpoint
+	AddTagEndpoint      endpoint.Endpoint
+	EditTagEndpoint     endpoint.Endpoint
+	DeleteTagEndpoint   endpoint.Endpoint
+	GetTagsEndpoint     endpoint.Endpoint
+	AddTopicEndpoint    endpoint.Endpoint
+	EditTopicEndpoint   endpoint.Endpoint
+	DeleteTopicEndpoint endpoint.Endpoint
+	GetTopicsEndpoint   endpoint.Endpoint
 }
 
 func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger, vault vlt.VLT) (TagEndpoint, error) {
@@ -54,10 +58,53 @@ func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger, vault vlt.V
 		getTagsEp = kitoc.TraceEndpoint(name)(getTagsEp)
 	}
 
+	// ..
+
+	var addTopicEp endpoint.Endpoint
+	{
+		const name = `AddTopic`
+		addTagEp = makeAddTagEndpoint(tagSvc)
+		addTagEp = mw.LoggingMiddleware(logger)(addTagEp)
+		addTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(addTagEp)
+		addTagEp = kitoc.TraceEndpoint(name)(addTagEp)
+	}
+
+	var editTopicEp endpoint.Endpoint
+	{
+		const name = `EditTopic`
+		editTagEp = makeEditTagEndpoint(tagSvc)
+		editTagEp = mw.LoggingMiddleware(logger)(editTagEp)
+		editTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(editTagEp)
+		editTagEp = kitoc.TraceEndpoint(name)(editTagEp)
+	}
+
+	var deleteTopicEp endpoint.Endpoint
+	{
+		const name = `DeleteTopic`
+		deleteTagEp = makeDeleteTagEndpoint(tagSvc)
+		deleteTagEp = mw.LoggingMiddleware(logger)(deleteTagEp)
+		deleteTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(deleteTagEp)
+		deleteTagEp = kitoc.TraceEndpoint(name)(deleteTagEp)
+	}
+
+	var getTopicsEp endpoint.Endpoint
+	{
+		const name = `DeleteTopic`
+		getTagsEp = makeGetTagsEndpoint(tagSvc)
+		getTagsEp = mw.LoggingMiddleware(logger)(getTagsEp)
+		getTagsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(getTagsEp)
+		getTagsEp = kitoc.TraceEndpoint(name)(getTagsEp)
+	}
+
 	return TagEndpoint{
 		AddTagEndpoint:    addTagEp,
 		EditTagEndpoint:   editTagEp,
 		DeleteTagEndpoint: deleteTagEp,
 		GetTagsEndpoint:   getTagsEp,
+
+		AddTopicEndpoint:    addTopicEp,
+		EditTopicEndpoint:   editTopicEp,
+		DeleteTopicEndpoint: deleteTopicEp,
+		GetTopicsEndpoint:   getTopicsEp,
 	}, nil
 }

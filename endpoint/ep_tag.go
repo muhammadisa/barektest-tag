@@ -15,7 +15,7 @@ func makeAddTagEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) AddTopics(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
+func (e TagEndpoint) AddTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
 	_, err := e.AddTagEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
