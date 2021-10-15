@@ -43,4 +43,3 @@ func (c *cache) GetTags(ctx context.Context) (res *pb.Tags, err error) {
 	}
 	return &tags, nil
 }
-
