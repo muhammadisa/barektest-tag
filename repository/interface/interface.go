@@ -25,7 +25,7 @@ type ReadWrite interface {
 	ReadNewsesByStatusAndTopicID(ctx context.Context, status int32, topicID string) (*pb.Newses, error)
 
 	RemoveNewsTagsByNewsID(ctx context.Context, req *pb.Select) error
-	WriteNewsTags(ctx context.Context, newsID string, tagIDs []string) error
+	WriteNewsTags(ctx context.Context, newsID string, tagIDs []string, new bool) error
 	ReadNewsTagsTagIDAndTagByNewsID(ctx context.Context, newsID string, all bool) (res []string)
 }
 

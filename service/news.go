@@ -12,7 +12,7 @@ func (s service) AddNews(ctx context.Context, news *pb.News) (res *emptypb.Empty
 	if err != nil {
 		return nil, err
 	}
-	err = s.repo.ReadWriter.WriteNewsTags(ctx, newNews.Id, news.NewsTagIds)
+	err = s.repo.ReadWriter.WriteNewsTags(ctx, newNews.Id, news.NewsTagIds, true)
 	if err != nil {
 		_ = s.repo.ReadWriter.RemoveNews(ctx, &pb.Select{Id: newNews.Id})
 		return nil, err
@@ -26,7 +26,7 @@ func (s service) EditNews(ctx context.Context, news *pb.News) (res *emptypb.Empt
 	if err != nil {
 		return nil, err
 	}
-	err = s.repo.ReadWriter.WriteNewsTags(ctx, oldNews.Id, news.NewsTagIds)
+	err = s.repo.ReadWriter.WriteNewsTags(ctx, oldNews.Id, news.NewsTagIds, false)
 	if err != nil {
 		return nil, err
 	}

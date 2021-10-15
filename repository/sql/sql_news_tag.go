@@ -56,7 +56,7 @@ func (r *readWrite) ReadNewsTagsTagIDAndTagByNewsID(ctx context.Context, newsID 
 	return res
 }
 
-func (r *readWrite) WriteNewsTags(ctx context.Context, newsID string, tagIDs []string) error {
+func (r *readWrite) WriteNewsTags(ctx context.Context, newsID string, tagIDs []string, new bool) error {
 	timeNow := time.Now()
 	length := len(tagIDs)
 
@@ -64,9 +64,11 @@ func (r *readWrite) WriteNewsTags(ctx context.Context, newsID string, tagIDs []s
 		return nil
 	}
 
-	err := r.RemoveNewsTagsByNewsID(ctx, &pb.Select{Id: newsID})
-	if err != nil {
-		return err
+	if !new{
+		err := r.RemoveNewsTagsByNewsID(ctx, &pb.Select{Id: newsID})
+		if err != nil {
+			return err
+		}
 	}
 
 	var valueStrings []string
@@ -82,7 +84,6 @@ func (r *readWrite) WriteNewsTags(ctx context.Context, newsID string, tagIDs []s
 	}
 
 	query := fmt.Sprintf(queryWriteBulkNewsTags, strings.Join(valueStrings, ","))
-	fmt.Println(query)
 	result, err := r.db.Exec(query, valueArgs...)
 	if err != nil {
 		return err
