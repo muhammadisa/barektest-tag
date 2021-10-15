@@ -11,14 +11,11 @@ import (
 )
 
 func (r *readWrite) WriteNews(ctx context.Context, req *pb.News) (res *pb.News, err error) {
-	const query = `
-	INSERT INTO news(id, topic_id, title, content, status, created_at, updated_at) VALUES (?,?,?,?,?,?,?)
-	`
 	currentTime := time.Now()
 	req.Id = uuid.NewV4().String()
 	req.CreatedAt = currentTime.Unix()
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryWriteNews)
 	if err != nil {
 		return res, err
 	}
@@ -43,35 +40,24 @@ func (r *readWrite) WriteNews(ctx context.Context, req *pb.News) (res *pb.News, 
 
 func (r *readWrite) ModifyNews(ctx context.Context, req *pb.News) (res *pb.News, err error) {
 	var oldNews model.News
-	const queryLookupExisting = `
-	SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE id = ? 
-	`
-	stmt, err := r.db.Prepare(queryLookupExisting)
+	stmt, err := r.db.Prepare(queryLookupCreateAtNews)
 	if err != nil {
 		return res, err
 	}
 	row := stmt.QueryRow(req.Id)
 	err = row.Scan(
 		&oldNews.ID,      // id
-		&oldNews.TopicID, // topic_id
-		&oldNews.Title,   // title
-		&oldNews.Content, // content
-		&oldNews.Status,  // status
 		&oldNews.Created, // created_at
-		&oldNews.Updated, // updated_at
 	)
 	if err != nil || err == sql.ErrNoRows {
 		return res, err
 	}
 	oldNews.UseUnixTimeStamp()
 
-	const query = `
-	UPDATE news SET topic_id = ?, title = ?, content = ?, status = ?, created_at = ?, updated_at = ? WHERE id = ?
-	`
 	currentTime := time.Now()
 	req.CreatedAt = oldNews.CreatedAt
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err = r.db.Prepare(query)
+	stmt, err = r.db.Prepare(queryUpdateNews)
 	if err != nil {
 		return res, err
 	}
@@ -95,10 +81,7 @@ func (r *readWrite) ModifyNews(ctx context.Context, req *pb.News) (res *pb.News,
 }
 
 func (r *readWrite) RemoveNews(ctx context.Context, req *pb.Select) error {
-	const query = `
-	DELETE FROM news WHERE id = ?
-	`
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryRemoveNews)
 	if err != nil {
 		return err
 	}
@@ -118,10 +101,7 @@ func (r *readWrite) RemoveNews(ctx context.Context, req *pb.Select) error {
 func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) {
 	var newses pb.Newses
 	var news model.News
-	const query = `
-	SELECT id, topic_id, title, content, status, created_at, updated_at FROM news ORDER BY created_at DESC 
-	`
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryReadNewses)
 	if err != nil {
 		return res, err
 	}

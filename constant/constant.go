@@ -1,10 +1,21 @@
 package constant
 
 const (
-	ServiceName = `news`
+	CircuitBreakerTimeout = 10
 )
 
-const(
-	// RedisTagPrefix tag:tag_uuid:tag_object
-	RedisTagPrefix = `tag:%s:%s`
+const (
+	// ServiceName service log name
+	ServiceName = `bareksa_news`
+)
+
+const (
+	// Tags redis key
+	Tags = `tags`
+
+	// Topics redis key
+	Topics = `topics`
+
+	// News redis key
+	News = `news`
 )

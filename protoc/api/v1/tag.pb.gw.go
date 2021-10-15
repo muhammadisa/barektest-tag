@@ -32,7 +32,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_TagService_AddTag_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_AddTag_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Tag
 	var metadata runtime.ServerMetadata
 
@@ -49,7 +49,7 @@ func request_TagService_AddTag_0(ctx context.Context, marshaler runtime.Marshale
 
 }
 
-func local_request_TagService_AddTag_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_AddTag_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Tag
 	var metadata runtime.ServerMetadata
 
@@ -66,7 +66,7 @@ func local_request_TagService_AddTag_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func request_TagService_EditTag_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_EditTag_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Tag
 	var metadata runtime.ServerMetadata
 
@@ -100,7 +100,7 @@ func request_TagService_EditTag_0(ctx context.Context, marshaler runtime.Marshal
 
 }
 
-func local_request_TagService_EditTag_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_EditTag_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Tag
 	var metadata runtime.ServerMetadata
 
@@ -134,7 +134,7 @@ func local_request_TagService_EditTag_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_TagService_DeleteTag_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_DeleteTag_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -160,7 +160,7 @@ func request_TagService_DeleteTag_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func local_request_TagService_DeleteTag_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_DeleteTag_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -186,7 +186,7 @@ func local_request_TagService_DeleteTag_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_TagService_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -195,7 +195,7 @@ func request_TagService_GetTags_0(ctx context.Context, marshaler runtime.Marshal
 
 }
 
-func local_request_TagService_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -204,7 +204,7 @@ func local_request_TagService_GetTags_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_TagService_AddTopic_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_AddTopic_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Topic
 	var metadata runtime.ServerMetadata
 
@@ -221,7 +221,7 @@ func request_TagService_AddTopic_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_TagService_AddTopic_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_AddTopic_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Topic
 	var metadata runtime.ServerMetadata
 
@@ -238,7 +238,7 @@ func local_request_TagService_AddTopic_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_TagService_EditTopic_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_EditTopic_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Topic
 	var metadata runtime.ServerMetadata
 
@@ -272,7 +272,7 @@ func request_TagService_EditTopic_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func local_request_TagService_EditTopic_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_EditTopic_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Topic
 	var metadata runtime.ServerMetadata
 
@@ -306,7 +306,7 @@ func local_request_TagService_EditTopic_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_TagService_DeleteTopic_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_DeleteTopic_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -332,7 +332,7 @@ func request_TagService_DeleteTopic_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func local_request_TagService_DeleteTopic_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_DeleteTopic_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -358,7 +358,7 @@ func local_request_TagService_DeleteTopic_0(ctx context.Context, marshaler runti
 
 }
 
-func request_TagService_GetTopics_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_GetTopics_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -367,7 +367,7 @@ func request_TagService_GetTopics_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func local_request_TagService_GetTopics_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_GetTopics_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq emptypb.Empty
 	var metadata runtime.ServerMetadata
 
@@ -376,7 +376,7 @@ func local_request_TagService_GetTopics_0(ctx context.Context, marshaler runtime
 
 }
 
-func request_TagService_AddNews_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_AddNews_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq News
 	var metadata runtime.ServerMetadata
 
@@ -393,7 +393,7 @@ func request_TagService_AddNews_0(ctx context.Context, marshaler runtime.Marshal
 
 }
 
-func local_request_TagService_AddNews_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_AddNews_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq News
 	var metadata runtime.ServerMetadata
 
@@ -410,7 +410,7 @@ func local_request_TagService_AddNews_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_TagService_EditNews_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_EditNews_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq News
 	var metadata runtime.ServerMetadata
 
@@ -444,7 +444,7 @@ func request_TagService_EditNews_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_TagService_EditNews_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_EditNews_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq News
 	var metadata runtime.ServerMetadata
 
@@ -478,7 +478,7 @@ func local_request_TagService_EditNews_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_TagService_DeleteNews_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BareksaNewsService_DeleteNews_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -504,7 +504,7 @@ func request_TagService_DeleteNews_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_TagService_DeleteNews_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BareksaNewsService_DeleteNews_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq Select
 	var metadata runtime.ServerMetadata
 
@@ -530,42 +530,60 @@ func local_request_TagService_DeleteNews_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_TagService_GetNewses_0(ctx context.Context, marshaler runtime.Marshaler, client TagServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+var (
+	filter_BareksaNewsService_GetNewses_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_BareksaNewsService_GetNewses_0(ctx context.Context, marshaler runtime.Marshaler, client BareksaNewsServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Filters
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BareksaNewsService_GetNewses_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := client.GetNewses(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_TagService_GetNewses_0(ctx context.Context, marshaler runtime.Marshaler, server TagServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq emptypb.Empty
+func local_request_BareksaNewsService_GetNewses_0(ctx context.Context, marshaler runtime.Marshaler, server BareksaNewsServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq Filters
 	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BareksaNewsService_GetNewses_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	msg, err := server.GetNewses(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-// RegisterTagServiceHandlerServer registers the http handlers for service TagService to "mux".
-// UnaryRPC     :call TagServiceServer directly.
+// RegisterBareksaNewsServiceHandlerServer registers the http handlers for service BareksaNewsService to "mux".
+// UnaryRPC     :call BareksaNewsServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterTagServiceHandlerFromEndpoint instead.
-func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server TagServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterBareksaNewsServiceHandlerFromEndpoint instead.
+func RegisterBareksaNewsServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server BareksaNewsServiceServer) error {
 
-	mux.Handle("POST", pattern_TagService_AddTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/AddTag", runtime.WithHTTPPathPattern("/v1/tag"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddTag", runtime.WithHTTPPathPattern("/v1/tag"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_AddTag_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_AddTag_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -573,22 +591,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_AddTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/EditTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_EditTag_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_EditTag_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -596,22 +614,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_EditTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/DeleteTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_DeleteTag_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_DeleteTag_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -619,22 +637,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_DeleteTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/GetTags", runtime.WithHTTPPathPattern("/v1/tags"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetTags", runtime.WithHTTPPathPattern("/v1/tags"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_GetTags_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_GetTags_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -642,22 +660,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_GetTags_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetTags_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_TagService_AddTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/AddTopic", runtime.WithHTTPPathPattern("/v1/topic"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddTopic", runtime.WithHTTPPathPattern("/v1/topic"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_AddTopic_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_AddTopic_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -665,22 +683,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_AddTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/EditTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_EditTopic_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_EditTopic_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -688,22 +706,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_EditTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/DeleteTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_DeleteTopic_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_DeleteTopic_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -711,22 +729,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_DeleteTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetTopics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetTopics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/GetTopics", runtime.WithHTTPPathPattern("/v1/topics"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetTopics", runtime.WithHTTPPathPattern("/v1/topics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_GetTopics_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_GetTopics_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -734,22 +752,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_GetTopics_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetTopics_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_TagService_AddNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/AddNews", runtime.WithHTTPPathPattern("/v1/news"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddNews", runtime.WithHTTPPathPattern("/v1/news"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_AddNews_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_AddNews_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -757,22 +775,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_AddNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/EditNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_EditNews_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_EditNews_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -780,22 +798,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_EditNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/DeleteNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_DeleteNews_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_DeleteNews_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -803,22 +821,22 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_DeleteNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetNewses_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetNewses_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.TagService/GetNewses", runtime.WithHTTPPathPattern("/v1/newses"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetNewses", runtime.WithHTTPPathPattern("/v1/newses"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_TagService_GetNewses_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BareksaNewsService_GetNewses_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -826,16 +844,16 @@ func RegisterTagServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 			return
 		}
 
-		forward_TagService_GetNewses_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetNewses_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterTagServiceHandlerFromEndpoint is same as RegisterTagServiceHandler but
+// RegisterBareksaNewsServiceHandlerFromEndpoint is same as RegisterBareksaNewsServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterTagServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterBareksaNewsServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -855,259 +873,259 @@ func RegisterTagServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.Ser
 		}()
 	}()
 
-	return RegisterTagServiceHandler(ctx, mux, conn)
+	return RegisterBareksaNewsServiceHandler(ctx, mux, conn)
 }
 
-// RegisterTagServiceHandler registers the http handlers for service TagService to "mux".
+// RegisterBareksaNewsServiceHandler registers the http handlers for service BareksaNewsService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterTagServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterTagServiceHandlerClient(ctx, mux, NewTagServiceClient(conn))
+func RegisterBareksaNewsServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterBareksaNewsServiceHandlerClient(ctx, mux, NewBareksaNewsServiceClient(conn))
 }
 
-// RegisterTagServiceHandlerClient registers the http handlers for service TagService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "TagServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "TagServiceClient"
+// RegisterBareksaNewsServiceHandlerClient registers the http handlers for service BareksaNewsService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "BareksaNewsServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "BareksaNewsServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "TagServiceClient" to call the correct interceptors.
-func RegisterTagServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client TagServiceClient) error {
+// "BareksaNewsServiceClient" to call the correct interceptors.
+func RegisterBareksaNewsServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client BareksaNewsServiceClient) error {
 
-	mux.Handle("POST", pattern_TagService_AddTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/AddTag", runtime.WithHTTPPathPattern("/v1/tag"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddTag", runtime.WithHTTPPathPattern("/v1/tag"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_AddTag_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_AddTag_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_AddTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/EditTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_EditTag_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_EditTag_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_EditTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteTag_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/DeleteTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteTag", runtime.WithHTTPPathPattern("/v1/tag/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_DeleteTag_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_DeleteTag_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_DeleteTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteTag_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/GetTags", runtime.WithHTTPPathPattern("/v1/tags"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetTags", runtime.WithHTTPPathPattern("/v1/tags"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_GetTags_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_GetTags_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_GetTags_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetTags_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_TagService_AddTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/AddTopic", runtime.WithHTTPPathPattern("/v1/topic"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddTopic", runtime.WithHTTPPathPattern("/v1/topic"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_AddTopic_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_AddTopic_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_AddTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/EditTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_EditTopic_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_EditTopic_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_EditTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteTopic_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/DeleteTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteTopic", runtime.WithHTTPPathPattern("/v1/topic/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_DeleteTopic_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_DeleteTopic_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_DeleteTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteTopic_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetTopics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetTopics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/GetTopics", runtime.WithHTTPPathPattern("/v1/topics"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetTopics", runtime.WithHTTPPathPattern("/v1/topics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_GetTopics_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_GetTopics_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_GetTopics_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetTopics_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_TagService_AddNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BareksaNewsService_AddNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/AddNews", runtime.WithHTTPPathPattern("/v1/news"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/AddNews", runtime.WithHTTPPathPattern("/v1/news"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_AddNews_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_AddNews_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_AddNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_AddNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_TagService_EditNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_BareksaNewsService_EditNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/EditNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/EditNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_EditNews_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_EditNews_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_EditNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_EditNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_TagService_DeleteNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_BareksaNewsService_DeleteNews_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/DeleteNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/DeleteNews", runtime.WithHTTPPathPattern("/v1/news/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_DeleteNews_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_DeleteNews_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_DeleteNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_DeleteNews_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_TagService_GetNewses_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_BareksaNewsService_GetNewses_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.TagService/GetNewses", runtime.WithHTTPPathPattern("/v1/newses"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/api.v1.BareksaNewsService/GetNewses", runtime.WithHTTPPathPattern("/v1/newses"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_TagService_GetNewses_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BareksaNewsService_GetNewses_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_TagService_GetNewses_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BareksaNewsService_GetNewses_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1115,53 +1133,53 @@ func RegisterTagServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 }
 
 var (
-	pattern_TagService_AddTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tag"}, ""))
+	pattern_BareksaNewsService_AddTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tag"}, ""))
 
-	pattern_TagService_EditTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "tag", "id"}, ""))
+	pattern_BareksaNewsService_EditTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "tag", "id"}, ""))
 
-	pattern_TagService_DeleteTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "tag", "id"}, ""))
+	pattern_BareksaNewsService_DeleteTag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "tag", "id"}, ""))
 
-	pattern_TagService_GetTags_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tags"}, ""))
+	pattern_BareksaNewsService_GetTags_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tags"}, ""))
 
-	pattern_TagService_AddTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topic"}, ""))
+	pattern_BareksaNewsService_AddTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topic"}, ""))
 
-	pattern_TagService_EditTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "topic", "id"}, ""))
+	pattern_BareksaNewsService_EditTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "topic", "id"}, ""))
 
-	pattern_TagService_DeleteTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "topic", "id"}, ""))
+	pattern_BareksaNewsService_DeleteTopic_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "topic", "id"}, ""))
 
-	pattern_TagService_GetTopics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topics"}, ""))
+	pattern_BareksaNewsService_GetTopics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "topics"}, ""))
 
-	pattern_TagService_AddNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "news"}, ""))
+	pattern_BareksaNewsService_AddNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "news"}, ""))
 
-	pattern_TagService_EditNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "news", "id"}, ""))
+	pattern_BareksaNewsService_EditNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "news", "id"}, ""))
 
-	pattern_TagService_DeleteNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "news", "id"}, ""))
+	pattern_BareksaNewsService_DeleteNews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "news", "id"}, ""))
 
-	pattern_TagService_GetNewses_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "newses"}, ""))
+	pattern_BareksaNewsService_GetNewses_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "newses"}, ""))
 )
 
 var (
-	forward_TagService_AddTag_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_AddTag_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_EditTag_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_EditTag_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_DeleteTag_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_DeleteTag_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_GetTags_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_GetTags_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_AddTopic_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_AddTopic_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_EditTopic_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_EditTopic_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_DeleteTopic_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_DeleteTopic_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_GetTopics_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_GetTopics_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_AddNews_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_AddNews_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_EditNews_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_EditNews_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_DeleteNews_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_DeleteNews_0 = runtime.ForwardResponseMessage
 
-	forward_TagService_GetNewses_0 = runtime.ForwardResponseMessage
+	forward_BareksaNewsService_GetNewses_0 = runtime.ForwardResponseMessage
 )

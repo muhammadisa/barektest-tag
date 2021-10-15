@@ -55,12 +55,12 @@ func (e BareksaNewsEndpoint) DeleteNews(ctx context.Context, req *pb.Select) (*e
 
 func makeGetNewsesEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		res, err := usecase.GetNewses(ctx, &emptypb.Empty{})
+		res, err := usecase.GetNewses(ctx, request.(*pb.Filters))
 		return res, err
 	}
 }
 
-func (e BareksaNewsEndpoint) GetNewses(ctx context.Context, req *emptypb.Empty) (*pb.Newses, error) {
+func (e BareksaNewsEndpoint) GetNewses(ctx context.Context, req *pb.Filters) (*pb.Newses, error) {
 	res, err := e.DeleteNewsEndpoint(ctx, req)
 	if err != nil {
 		return &pb.Newses{}, err

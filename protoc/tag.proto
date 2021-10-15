@@ -32,6 +32,13 @@ message Select {
   string id = 1;
 }
 
+message Filters {
+  string args_1 = 1;
+  string args_2 = 2;
+  string args_3 = 3;
+  string args_4 = 4;
+}
+
 message Tags {
   repeated Tag tags = 1;
 }
@@ -44,7 +51,7 @@ message Newses{
   repeated News newses = 1;
 }
 
-service TagService {
+service BareksaNewsService {
   rpc AddTag(Tag) returns (google.protobuf.Empty);
   rpc EditTag(Tag) returns (google.protobuf.Empty);
   rpc DeleteTag(Select) returns (google.protobuf.Empty);
@@ -58,5 +65,5 @@ service TagService {
   rpc AddNews(News) returns (google.protobuf.Empty);
   rpc EditNews(News) returns (google.protobuf.Empty);
   rpc DeleteNews(Select) returns (google.protobuf.Empty);
-  rpc GetNewses(google.protobuf.Empty) returns (Newses);
+  rpc GetNewses(Filters) returns (Newses);
 }

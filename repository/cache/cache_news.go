@@ -3,6 +3,7 @@ package cache
 import (
 	"context"
 	"encoding/json"
+	"github.com/muhammadisa/barektest-tag/constant"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 )
 
@@ -11,16 +12,16 @@ func (c *cache) SetNews(ctx context.Context, news *pb.News) (err error) {
 	if err != nil {
 		return err
 	}
-	return c.redis.HSetNX(ctx, "news", news.Id, string(newsByte)).Err()
+	return c.redis.HSetNX(ctx, constant.News, news.Id, string(newsByte)).Err()
 }
 
 func (c *cache) UnsetNews(ctx context.Context, id string) (err error) {
-	return c.redis.HDel(ctx, "news", id).Err()
+	return c.redis.HDel(ctx, constant.News, id).Err()
 }
 
 func (c *cache) GetNewses(ctx context.Context) (res *pb.Newses, err error) {
 	var newses pb.Newses
-	newsesMap := c.redis.HGetAll(ctx, "news").Val()
+	newsesMap := c.redis.HGetAll(ctx, constant.News).Val()
 	for _, v := range newsesMap {
 		var news pb.News
 		err = json.Unmarshal([]byte(v), &news)
@@ -41,6 +42,6 @@ func (c *cache) ReloadNewses(ctx context.Context, newses *pb.Newses) (err error)
 		}
 		data[news.Id] = string(newsByte)
 	}
-	return c.redis.HMSet(ctx, "news", data).Err()
+	return c.redis.HMSet(ctx, constant.News, data).Err()
 }
 

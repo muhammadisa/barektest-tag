@@ -11,14 +11,11 @@ import (
 )
 
 func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
-	const query = `
-	INSERT INTO tags(id, tag, created_at, updated_at) VALUES (?,?,?,?)
-	`
 	currentTime := time.Now()
 	req.Id = uuid.NewV4().String()
 	req.CreatedAt = currentTime.Unix()
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryWriteTag)
 	if err != nil {
 		return res, err
 	}
@@ -40,32 +37,25 @@ func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err
 
 func (r *readWrite) ModifyTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
 	var oldTag model.Tag
-	const queryLookupExisting = `
-	SELECT id, tag, created_at, updated_at FROM tags WHERE id = ? 
-	`
-	stmt, err := r.db.Prepare(queryLookupExisting)
+
+	stmt, err := r.db.Prepare(queryLookupCreateAtTag)
 	if err != nil {
 		return res, err
 	}
 	row := stmt.QueryRow(req.Id)
 	err = row.Scan(
 		&oldTag.ID,      // id
-		&oldTag.Tag,     // tag
 		&oldTag.Created, // created_at
-		&oldTag.Updated, // updated_at
 	)
 	if err != nil || err == sql.ErrNoRows {
 		return res, err
 	}
 	oldTag.UseUnixTimeStamp()
 
-	const query = `
-	UPDATE tags SET tag = ?, created_at = ?, updated_at = ? WHERE id = ?
-	`
 	currentTime := time.Now()
 	req.CreatedAt = oldTag.CreatedAt
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err = r.db.Prepare(query)
+	stmt, err = r.db.Prepare(queryUpdateTag)
 	if err != nil {
 		return res, err
 	}
@@ -86,10 +76,7 @@ func (r *readWrite) ModifyTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, er
 }
 
 func (r *readWrite) RemoveTag(ctx context.Context, req *pb.Select) (err error) {
-	const query = `
-	DELETE FROM tags WHERE id = ?
-	`
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryRemoveTag)
 	if err != nil {
 		return err
 	}
@@ -109,10 +96,8 @@ func (r *readWrite) RemoveTag(ctx context.Context, req *pb.Select) (err error) {
 func (r *readWrite) ReadTags(ctx context.Context) (res *pb.Tags, err error) {
 	var tags pb.Tags
 	var tag model.Tag
-	const query = `
-	SELECT id, tag, created_at, updated_at FROM tags ORDER BY created_at DESC 
-	`
-	stmt, err := r.db.Prepare(query)
+
+	stmt, err := r.db.Prepare(queryReadTags)
 	if err != nil {
 		return res, err
 	}

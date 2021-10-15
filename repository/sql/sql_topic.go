@@ -11,14 +11,11 @@ import (
 )
 
 func (r *readWrite) WriteTopic(ctx context.Context, req *pb.Topic) (res *pb.Topic, err error) {
-	const query = `
-	INSERT INTO topics(id, title, headline, created_at, updated_at) VALUES (?,?,?,?,?)
-	`
 	currentTime := time.Now()
 	req.Id = uuid.NewV4().String()
 	req.CreatedAt = currentTime.Unix()
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryWriteTopic)
 	if err != nil {
 		return res, err
 	}
@@ -41,33 +38,25 @@ func (r *readWrite) WriteTopic(ctx context.Context, req *pb.Topic) (res *pb.Topi
 
 func (r *readWrite) ModifyTopic(ctx context.Context, req *pb.Topic) (res *pb.Topic, err error) {
 	var oldTopic model.Topic
-	const queryLookupExisting = `
-	SELECT id, title, headline, created_at, updated_at FROM topics WHERE id = ? 
-	`
-	stmt, err := r.db.Prepare(queryLookupExisting)
+
+	stmt, err := r.db.Prepare(queryLookupCreateAtTopic)
 	if err != nil {
 		return res, err
 	}
 	row := stmt.QueryRow(req.Id)
 	err = row.Scan(
-		&oldTopic.ID,       // id
-		&oldTopic.Title,    // title
-		&oldTopic.Headline, // headline
-		&oldTopic.Created,  // created_at
-		&oldTopic.Updated,  // updated_at
+		&oldTopic.ID,      // id
+		&oldTopic.Created, // created_at
 	)
 	if err != nil || err == sql.ErrNoRows {
 		return res, err
 	}
 	oldTopic.UseUnixTimeStamp()
 
-	const query = `
-	UPDATE topics SET title = ?, headline = ?, created_at = ?, updated_at = ? WHERE id = ?
-	`
 	currentTime := time.Now()
 	req.CreatedAt = oldTopic.CreatedAt
 	req.UpdatedAt = currentTime.Unix()
-	stmt, err = r.db.Prepare(query)
+	stmt, err = r.db.Prepare(queryUpdateTopic)
 	if err != nil {
 		return res, err
 	}
@@ -89,10 +78,7 @@ func (r *readWrite) ModifyTopic(ctx context.Context, req *pb.Topic) (res *pb.Top
 }
 
 func (r *readWrite) RemoveTopic(ctx context.Context, req *pb.Select) error {
-	const query = `
-	DELETE FROM topics WHERE id = ?
-	`
-	stmt, err := r.db.Prepare(query)
+	stmt, err := r.db.Prepare(queryRemoveTopic)
 	if err != nil {
 		return err
 	}
@@ -112,10 +98,8 @@ func (r *readWrite) RemoveTopic(ctx context.Context, req *pb.Select) error {
 func (r *readWrite) ReadTopics(ctx context.Context) (res *pb.Topics, err error) {
 	var topics pb.Topics
 	var topic model.Topic
-	const query = `
-	SELECT id, title, headline, created_at, updated_at FROM topics ORDER BY created_at DESC 
-	`
-	stmt, err := r.db.Prepare(query)
+
+	stmt, err := r.db.Prepare(queryReadTopics)
 	if err != nil {
 		return res, err
 	}

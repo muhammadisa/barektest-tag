@@ -29,7 +29,7 @@ import (
 )
 
 // ServeGRPC serving GRPC server and will be merged using MergeServer function
-func ServeGRPC(listener net.Listener, service pb.TagServiceServer, serverOptions []grpc.ServerOption) error {
+func ServeGRPC(listener net.Listener, service pb.BareksaNewsServiceServer, serverOptions []grpc.ServerOption) error {
 	level.Info(gvars.Log).Log(lgr.LogInfo, "initialize grpc server")
 
 	var grpcServer *grpc.Server
@@ -38,16 +38,16 @@ func ServeGRPC(listener net.Listener, service pb.TagServiceServer, serverOptions
 	} else {
 		grpcServer = grpc.NewServer()
 	}
-	pb.RegisterTagServiceServer(grpcServer, service)
+	pb.RegisterBareksaNewsServiceServer(grpcServer, service)
 	return grpcServer.Serve(listener)
 }
 
 // ServeHTTP serving HTTP server and will be merged using MergeServer function
-func ServeHTTP(listener net.Listener, service pb.TagServiceServer) error {
+func ServeHTTP(listener net.Listener, service pb.BareksaNewsServiceServer) error {
 	level.Info(gvars.Log).Log(lgr.LogInfo, "initialize rest server")
 
 	mux := runtime.NewServeMux()
-	err := pb.RegisterTagServiceHandlerServer(context.Background(), mux, service)
+	err := pb.RegisterBareksaNewsServiceHandlerServer(context.Background(), mux, service)
 	if err != nil {
 		return err
 	}
@@ -56,7 +56,7 @@ func ServeHTTP(listener net.Listener, service pb.TagServiceServer) error {
 }
 
 // MergeServer start ServeGRPC and ServeHTTP concurrently
-func MergeServer(service pb.TagServiceServer, serverOptions []grpc.ServerOption) {
+func MergeServer(service pb.BareksaNewsServiceServer, serverOptions []grpc.ServerOption) {
 	port := fmt.Sprintf(":%s", "8010")
 	listener, err := net.Listen("tcp", port)
 	if err != nil {
@@ -108,23 +108,20 @@ func main() {
 		}
 	}
 
+	err := cb.StartHystrix(constant.CircuitBreakerTimeout, constant.ServiceName)
+	if err != nil {
+		panic(err)
+	}
+
 	tagRepo, err := repository.NewRepository(ctx, repoConf, trcr)
 	if err != nil {
 		panic(err)
 	}
 
-	err = cb.StartHystrix(10, constant.ServiceName)
+	bareksaNewsEp, err := ep.NewBareksaNewsEndpoint(service.NewUsecases(*tagRepo, trcr), gvars.Log)
 	if err != nil {
 		panic(err)
 	}
 
-	tagSvc := service.NewUsecases(*tagRepo, trcr)
-
-	tagEp, err := ep.NewTagEndpoint(tagSvc, gvars.Log)
-	if err != nil {
-		panic(err)
-	}
-
-	server := transport.NewTagServer(tagEp)
-	MergeServer(server, nil)
+	MergeServer(transport.NewBareksaNewsServer(bareksaNewsEp), nil)
 }

@@ -50,7 +50,7 @@ func (g grpcTagServer) DeleteNews(ctx context.Context, req *pb.Select) (*emptypb
 	return res.(*emptypb.Empty), nil
 }
 
-func (g grpcTagServer) GetNewses(ctx context.Context, req *emptypb.Empty) (*pb.Newses, error) {
+func (g grpcTagServer) GetNewses(ctx context.Context, req *pb.Filters) (*pb.Newses, error) {
 	_, res, err := g.getNewses.ServeGRPC(ctx, req)
 	if err != nil {
 		return nil, err
@@ -126,7 +126,7 @@ func (g grpcTagServer) GetTags(ctx context.Context, req *emptypb.Empty) (*pb.Tag
 	return res.(*pb.Tags), nil
 }
 
-func NewTagServer(endpoints ep.BareksaNewsEndpoint) pb.TagServiceServer {
+func NewBareksaNewsServer(endpoints ep.BareksaNewsEndpoint) pb.BareksaNewsServiceServer {
 	options := []grpctransport.ServerOption{
 		kitoc.GRPCServerTrace(),
 	}

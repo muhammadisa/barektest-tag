@@ -26,7 +26,7 @@ type BareksaNewsEndpoint struct {
 	GetNewsesEndpoint  endpoint.Endpoint
 }
 
-func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (BareksaNewsEndpoint, error) {
+func NewBareksaNewsEndpoint(tagSvc _interface.Service, logger logger.Logger) (BareksaNewsEndpoint, error) {
 
 	var addTagEp endpoint.Endpoint
 	{

@@ -39,7 +39,7 @@ func (s service) DeleteNews(ctx context.Context, selectNews *pb.Select) (res *em
 	return nil, nil
 }
 
-func (s service) GetNewses(ctx context.Context, _ *emptypb.Empty) (res *pb.Newses, err error) {
+func (s service) GetNewses(ctx context.Context, filters *pb.Filters) (res *pb.Newses, err error) {
 	res, err = s.repo.CacheReadWriter.GetNewses(ctx)
 	if err != nil {
 		return nil, err
