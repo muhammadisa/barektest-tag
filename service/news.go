@@ -42,44 +42,40 @@ func (s service) DeleteNews(ctx context.Context, selectNews *pb.Select) (res *em
 	return nil, s.repo.CacheReadWriter.InvalidateNewses(ctx)
 }
 
-func filter(filters *pb.Filters) (res string) {
-	if filters.TopicId == "" && filters.Status == 0 {
-		res = "none"
-	}
+func (s service) filterRedisKeyGenerator(filters *pb.Filters) (res string) {
 	if filters.TopicId != "" && filters.Status != 0 {
 		res = fmt.Sprintf("topic_id_status_%s_%d", filters.TopicId, filters.Status)
-	}
-	if filters.Status != 0 {
+	}else if filters.Status != 0 {
 		res = fmt.Sprintf("status_%d", filters.Status)
-	}
-	if filters.TopicId != "" {
+	}else if filters.TopicId != "" {
 		res = fmt.Sprintf("topic_id_%s", filters.TopicId)
+	}else if filters.TopicId == "" && filters.Status == 0 {
+		res = "none"
 	}
 	return
 }
 
 func (s service) GetNewses(ctx context.Context, filters *pb.Filters) (res *pb.Newses, err error) {
-	filterValue := filter(filters)
+	filterValue := s.filterRedisKeyGenerator(filters)
 	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx, filterValue); reload {
 		_ = s.repo.CacheReadWriter.SetFilter(ctx, filterValue)
-		if filters.TopicId == "" && filters.Status == 0 {
-			res, err = s.repo.ReadWriter.ReadNewses(ctx)
-		}
 		if filters.TopicId != "" && filters.Status != 0 {
 			res, err = s.repo.ReadWriter.ReadNewsesByStatusAndTopicID(ctx, filters.Status, filters.TopicId)
-		}
-		if filters.Status != 0 {
+		}else if filters.Status != 0 {
 			res, err = s.repo.ReadWriter.ReadNewsesByStatus(ctx, filters.Status)
-		}
-		if filters.TopicId != "" {
+		}else if filters.TopicId != "" {
 			res, err = s.repo.ReadWriter.ReadNewsesByTopicID(ctx, filters.TopicId)
+		}else if filters.TopicId == "" && filters.Status == 0 {
+			res, err = s.repo.ReadWriter.ReadNewses(ctx)
 		}
 		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
 		if err != nil {
 			return nil, err
 		}
+		fmt.Println("database")
 		return res, nil
 	} else {
+		fmt.Println("redis")
 		return s.repo.CacheReadWriter.GetNewses(ctx)
 	}
 }
