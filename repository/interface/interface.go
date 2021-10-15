@@ -20,6 +20,8 @@ type ReadWrite interface {
 	ModifyNews(ctx context.Context, req *pb.News) (*pb.News, error)
 	RemoveNews(ctx context.Context, req *pb.Select) error
 	ReadNewses(ctx context.Context) (*pb.Newses, error)
+
+	WriteNewsTags(ctx context.Context, newsID string, tagIDs []string) error
 }
 
 type Cache interface {

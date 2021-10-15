@@ -101,6 +101,7 @@ func (r *readWrite) RemoveNews(ctx context.Context, req *pb.Select) error {
 func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) {
 	var newses pb.Newses
 	var news model.News
+
 	stmt, err := r.db.Prepare(queryReadNewses)
 	if err != nil {
 		return res, err
@@ -126,13 +127,15 @@ func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) 
 		}
 		news.UseUnixTimeStamp()
 		newses.Newses = append(newses.Newses, &pb.News{
-			Id:        news.ID,
-			TopicId:   news.TopicID,
-			Title:     news.Title,
-			Content:   news.Content,
-			Status:    news.Status,
-			CreatedAt: news.CreatedAt,
-			UpdatedAt: news.UpdatedAt,
+			Id:           news.ID,
+			TopicId:      news.TopicID,
+			Title:        news.Title,
+			Content:      news.Content,
+			Status:       news.Status,
+			NewsTagIds:   r.ReadNewsTagsTagIDAndTagByNewsID(ctx, news.ID, false),
+			NewsTagNames: r.ReadNewsTagsTagIDAndTagByNewsID(ctx, news.ID, true),
+			CreatedAt:    news.CreatedAt,
+			UpdatedAt:    news.UpdatedAt,
 		})
 	}
 	return &newses, nil
