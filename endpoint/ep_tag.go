@@ -15,7 +15,7 @@ func makeAddTagEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) AddTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) AddTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
 	_, err := e.AddTagEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -30,7 +30,7 @@ func makeEditTagEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) EditTopics(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) EditTopics(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
 	_, err := e.EditTagEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -45,7 +45,7 @@ func makeDeleteTagEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) DeleteTag(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) DeleteTag(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
 	_, err := e.DeleteTagEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -60,7 +60,7 @@ func makeGetTagsEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) GetTags(ctx context.Context, req *emptypb.Empty) (*pb.Tags, error) {
+func (e BareksaNewsEndpoint) GetTags(ctx context.Context, req *emptypb.Empty) (*pb.Tags, error) {
 	res, err := e.DeleteTagEndpoint(ctx, req)
 	if err != nil {
 		return &pb.Tags{}, err

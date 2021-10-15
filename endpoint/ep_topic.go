@@ -15,7 +15,7 @@ func makeAddTopicEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) AddTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) AddTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
 	_, err := e.AddTopicEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -30,7 +30,7 @@ func makeEditTopicEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) EditTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) EditTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
 	_, err := e.EditTopicEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -45,7 +45,7 @@ func makeDeleteTopicEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) DeleteTopic(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
+func (e BareksaNewsEndpoint) DeleteTopic(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
 	_, err := e.DeleteTopicEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
@@ -60,7 +60,7 @@ func makeGetTopicsEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	}
 }
 
-func (e TagEndpoint) GetTopics(ctx context.Context, req *emptypb.Empty) (*pb.Topics, error) {
+func (e BareksaNewsEndpoint) GetTopics(ctx context.Context, req *emptypb.Empty) (*pb.Topics, error) {
 	res, err := e.DeleteTopicEndpoint(ctx, req)
 	if err != nil {
 		return &pb.Topics{}, err

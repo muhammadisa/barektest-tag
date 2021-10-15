@@ -19,7 +19,46 @@ type grpcTagServer struct {
 	editTopic   grpctransport.Handler
 	deleteTopic grpctransport.Handler
 	getTopics   grpctransport.Handler
+
+	addNews    grpctransport.Handler
+	editNews   grpctransport.Handler
+	deleteNews grpctransport.Handler
+	getNewses  grpctransport.Handler
 }
+
+func (g grpcTagServer) AddNews(ctx context.Context, req *pb.News) (*emptypb.Empty, error) {
+	_, res, err := g.addNews.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) EditNews(ctx context.Context, req *pb.News) (*emptypb.Empty, error) {
+	_, res, err := g.editNews.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) DeleteNews(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
+	_, res, err := g.deleteNews.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) GetNewses(ctx context.Context, req *emptypb.Empty) (*pb.Newses, error) {
+	_, res, err := g.getNewses.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*pb.Newses), nil
+}
+
+// ..
 
 func (g grpcTagServer) AddTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
 	_, res, err := g.addTopic.ServeGRPC(ctx, req)
@@ -87,7 +126,7 @@ func (g grpcTagServer) GetTags(ctx context.Context, req *emptypb.Empty) (*pb.Tag
 	return res.(*pb.Tags), nil
 }
 
-func NewTagServer(endpoints ep.TagEndpoint) pb.TagServiceServer {
+func NewTagServer(endpoints ep.BareksaNewsEndpoint) pb.TagServiceServer {
 	options := []grpctransport.ServerOption{
 		kitoc.GRPCServerTrace(),
 	}
@@ -137,6 +176,31 @@ func NewTagServer(endpoints ep.TagEndpoint) pb.TagServiceServer {
 		),
 		getTopics: grpctransport.NewServer(
 			endpoints.GetTopicsEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		//..
+		addNews: grpctransport.NewServer(
+			endpoints.AddNewsEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		editNews: grpctransport.NewServer(
+			endpoints.EditNewsEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		deleteNews: grpctransport.NewServer(
+			endpoints.DeleteNewsEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		getNewses: grpctransport.NewServer(
+			endpoints.GetNewsesEndpoint,
 			decodeRequest,
 			encodeResponse,
 			options...,

@@ -9,18 +9,25 @@ import (
 	"github.com/muhammadisa/barektest-util/mw"
 )
 
-type TagEndpoint struct {
-	AddTagEndpoint      endpoint.Endpoint
-	EditTagEndpoint     endpoint.Endpoint
-	DeleteTagEndpoint   endpoint.Endpoint
-	GetTagsEndpoint     endpoint.Endpoint
+type BareksaNewsEndpoint struct {
+	AddTagEndpoint    endpoint.Endpoint
+	EditTagEndpoint   endpoint.Endpoint
+	DeleteTagEndpoint endpoint.Endpoint
+	GetTagsEndpoint   endpoint.Endpoint
+
 	AddTopicEndpoint    endpoint.Endpoint
 	EditTopicEndpoint   endpoint.Endpoint
 	DeleteTopicEndpoint endpoint.Endpoint
 	GetTopicsEndpoint   endpoint.Endpoint
+
+	AddNewsEndpoint    endpoint.Endpoint
+	EditNewsEndpoint   endpoint.Endpoint
+	DeleteNewsEndpoint endpoint.Endpoint
+	GetNewsesEndpoint  endpoint.Endpoint
 }
 
-func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (TagEndpoint, error) {
+func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (BareksaNewsEndpoint, error) {
+
 	var addTagEp endpoint.Endpoint
 	{
 		const name = `AddTag`
@@ -95,7 +102,45 @@ func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (TagEndpoin
 		getTopicsEp = kitoc.TraceEndpoint(name)(getTopicsEp)
 	}
 
-	return TagEndpoint{
+	// ..
+
+	var addNewsEp endpoint.Endpoint
+	{
+		const name = `AddNews`
+		addNewsEp = makeAddNewsEndpoint(tagSvc)
+		addNewsEp = mw.LoggingMiddleware(logger)(addNewsEp)
+		addNewsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(addNewsEp)
+		addNewsEp = kitoc.TraceEndpoint(name)(addNewsEp)
+	}
+
+	var editNewsEp endpoint.Endpoint
+	{
+		const name = `EditNews`
+		editNewsEp = makeEditNewsEndpoint(tagSvc)
+		editNewsEp = mw.LoggingMiddleware(logger)(editNewsEp)
+		editNewsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(editNewsEp)
+		editNewsEp = kitoc.TraceEndpoint(name)(editNewsEp)
+	}
+
+	var deleteNewsEp endpoint.Endpoint
+	{
+		const name = `DeleteNews`
+		deleteNewsEp = makeDeleteNewsEndpoint(tagSvc)
+		deleteNewsEp = mw.LoggingMiddleware(logger)(deleteNewsEp)
+		deleteNewsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(deleteNewsEp)
+		deleteNewsEp = kitoc.TraceEndpoint(name)(deleteNewsEp)
+	}
+
+	var getNewsesEp endpoint.Endpoint
+	{
+		const name = `GetNewses`
+		getNewsesEp = makeGetNewsesEndpoint(tagSvc)
+		getNewsesEp = mw.LoggingMiddleware(logger)(getNewsesEp)
+		getNewsesEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(getNewsesEp)
+		getNewsesEp = kitoc.TraceEndpoint(name)(getNewsesEp)
+	}
+
+	return BareksaNewsEndpoint{
 		AddTagEndpoint:    addTagEp,
 		EditTagEndpoint:   editTagEp,
 		DeleteTagEndpoint: deleteTagEp,
@@ -105,5 +150,10 @@ func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (TagEndpoin
 		EditTopicEndpoint:   editTopicEp,
 		DeleteTopicEndpoint: deleteTopicEp,
 		GetTopicsEndpoint:   getTopicsEp,
+
+		AddNewsEndpoint:    addNewsEp,
+		EditNewsEndpoint:   editNewsEp,
+		DeleteNewsEndpoint: deleteNewsEp,
+		GetNewsesEndpoint:  getNewsesEp,
 	}, nil
 }
