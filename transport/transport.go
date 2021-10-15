@@ -32,7 +32,8 @@ func (g grpcTagServer) EditTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty
 	return res.(*emptypb.Empty), nil
 }
 
-func (g grpcTagServer) DeleteTag(ctx context.Context, req *pb.SelectTag) (*emptypb.Empty, error) {
+//goland:noinspection Annotator
+func (g grpcTagServer) DeleteTag(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
 	_, res, err := g.deleteTag.ServeGRPC(ctx, req)
 	if err != nil {
 		return nil, err

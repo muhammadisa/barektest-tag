@@ -21,8 +21,12 @@ const _ = grpc.SupportPackageIsVersion7
 type TagServiceClient interface {
 	AddTag(ctx context.Context, in *Tag, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	EditTag(ctx context.Context, in *Tag, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DeleteTag(ctx context.Context, in *SelectTag, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteTag(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTags(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Tags, error)
+	AddTopic(ctx context.Context, in *Topic, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	EditTopic(ctx context.Context, in *Topic, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteTopic(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetTopics(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Topics, error)
 }
 
 type tagServiceClient struct {
@@ -51,7 +55,7 @@ func (c *tagServiceClient) EditTag(ctx context.Context, in *Tag, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *tagServiceClient) DeleteTag(ctx context.Context, in *SelectTag, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tagServiceClient) DeleteTag(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/api.v1.TagService/DeleteTag", in, out, opts...)
 	if err != nil {
@@ -69,14 +73,54 @@ func (c *tagServiceClient) GetTags(ctx context.Context, in *emptypb.Empty, opts 
 	return out, nil
 }
 
+func (c *tagServiceClient) AddTopic(ctx context.Context, in *Topic, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/AddTopic", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) EditTopic(ctx context.Context, in *Topic, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/EditTopic", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) DeleteTopic(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/DeleteTopic", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) GetTopics(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Topics, error) {
+	out := new(Topics)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/GetTopics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TagServiceServer is the server API for TagService service.
 // All implementations should embed UnimplementedTagServiceServer
 // for forward compatibility
 type TagServiceServer interface {
 	AddTag(context.Context, *Tag) (*emptypb.Empty, error)
 	EditTag(context.Context, *Tag) (*emptypb.Empty, error)
-	DeleteTag(context.Context, *SelectTag) (*emptypb.Empty, error)
+	DeleteTag(context.Context, *Select) (*emptypb.Empty, error)
 	GetTags(context.Context, *emptypb.Empty) (*Tags, error)
+	AddTopic(context.Context, *Topic) (*emptypb.Empty, error)
+	EditTopic(context.Context, *Topic) (*emptypb.Empty, error)
+	DeleteTopic(context.Context, *Select) (*emptypb.Empty, error)
+	GetTopics(context.Context, *emptypb.Empty) (*Topics, error)
 }
 
 // UnimplementedTagServiceServer should be embedded to have forward compatible implementations.
@@ -89,11 +133,23 @@ func (UnimplementedTagServiceServer) AddTag(context.Context, *Tag) (*emptypb.Emp
 func (UnimplementedTagServiceServer) EditTag(context.Context, *Tag) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EditTag not implemented")
 }
-func (UnimplementedTagServiceServer) DeleteTag(context.Context, *SelectTag) (*emptypb.Empty, error) {
+func (UnimplementedTagServiceServer) DeleteTag(context.Context, *Select) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
 }
 func (UnimplementedTagServiceServer) GetTags(context.Context, *emptypb.Empty) (*Tags, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTags not implemented")
+}
+func (UnimplementedTagServiceServer) AddTopic(context.Context, *Topic) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTopic not implemented")
+}
+func (UnimplementedTagServiceServer) EditTopic(context.Context, *Topic) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditTopic not implemented")
+}
+func (UnimplementedTagServiceServer) DeleteTopic(context.Context, *Select) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTopic not implemented")
+}
+func (UnimplementedTagServiceServer) GetTopics(context.Context, *emptypb.Empty) (*Topics, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTopics not implemented")
 }
 
 // UnsafeTagServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -144,7 +200,7 @@ func _TagService_EditTag_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _TagService_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SelectTag)
+	in := new(Select)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -156,7 +212,7 @@ func _TagService_DeleteTag_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/api.v1.TagService/DeleteTag",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TagServiceServer).DeleteTag(ctx, req.(*SelectTag))
+		return srv.(TagServiceServer).DeleteTag(ctx, req.(*Select))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -175,6 +231,78 @@ func _TagService_GetTags_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TagServiceServer).GetTags(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_AddTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Topic)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).AddTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/AddTopic",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).AddTopic(ctx, req.(*Topic))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_EditTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Topic)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).EditTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/EditTopic",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).EditTopic(ctx, req.(*Topic))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_DeleteTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Select)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).DeleteTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/DeleteTopic",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).DeleteTopic(ctx, req.(*Select))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_GetTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).GetTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/GetTopics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).GetTopics(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -201,6 +329,22 @@ var TagService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTags",
 			Handler:    _TagService_GetTags_Handler,
+		},
+		{
+			MethodName: "AddTopic",
+			Handler:    _TagService_AddTopic_Handler,
+		},
+		{
+			MethodName: "EditTopic",
+			Handler:    _TagService_EditTopic_Handler,
+		},
+		{
+			MethodName: "DeleteTopic",
+			Handler:    _TagService_DeleteTopic_Handler,
+		},
+		{
+			MethodName: "GetTopics",
+			Handler:    _TagService_GetTopics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

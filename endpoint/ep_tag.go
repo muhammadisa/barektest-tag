@@ -40,12 +40,12 @@ func (e TagEndpoint) EditTopics(ctx context.Context, req *pb.Tag) (*emptypb.Empt
 
 func makeDeleteTagEndpoint(usecase _interface.Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		res, err := usecase.DeleteTag(ctx, request.(*pb.SelectTag))
+		res, err := usecase.DeleteTag(ctx, request.(*pb.Select))
 		return res, err
 	}
 }
 
-func (e TagEndpoint) DeleteTag(ctx context.Context, req *pb.SelectTag) (*emptypb.Empty, error) {
+func (e TagEndpoint) DeleteTag(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
 	_, err := e.DeleteTagEndpoint(ctx, req)
 	if err != nil {
 		return &emptypb.Empty{}, err
