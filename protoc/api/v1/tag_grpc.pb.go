@@ -27,6 +27,10 @@ type TagServiceClient interface {
 	EditTopic(ctx context.Context, in *Topic, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteTopic(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTopics(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Topics, error)
+	AddNews(ctx context.Context, in *News, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	EditNews(ctx context.Context, in *News, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteNews(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetNewses(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Newses, error)
 }
 
 type tagServiceClient struct {
@@ -109,6 +113,42 @@ func (c *tagServiceClient) GetTopics(ctx context.Context, in *emptypb.Empty, opt
 	return out, nil
 }
 
+func (c *tagServiceClient) AddNews(ctx context.Context, in *News, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/AddNews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) EditNews(ctx context.Context, in *News, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/EditNews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) DeleteNews(ctx context.Context, in *Select, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/DeleteNews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagServiceClient) GetNewses(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Newses, error) {
+	out := new(Newses)
+	err := c.cc.Invoke(ctx, "/api.v1.TagService/GetNewses", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TagServiceServer is the server API for TagService service.
 // All implementations should embed UnimplementedTagServiceServer
 // for forward compatibility
@@ -121,6 +161,10 @@ type TagServiceServer interface {
 	EditTopic(context.Context, *Topic) (*emptypb.Empty, error)
 	DeleteTopic(context.Context, *Select) (*emptypb.Empty, error)
 	GetTopics(context.Context, *emptypb.Empty) (*Topics, error)
+	AddNews(context.Context, *News) (*emptypb.Empty, error)
+	EditNews(context.Context, *News) (*emptypb.Empty, error)
+	DeleteNews(context.Context, *Select) (*emptypb.Empty, error)
+	GetNewses(context.Context, *emptypb.Empty) (*Newses, error)
 }
 
 // UnimplementedTagServiceServer should be embedded to have forward compatible implementations.
@@ -150,6 +194,18 @@ func (UnimplementedTagServiceServer) DeleteTopic(context.Context, *Select) (*emp
 }
 func (UnimplementedTagServiceServer) GetTopics(context.Context, *emptypb.Empty) (*Topics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTopics not implemented")
+}
+func (UnimplementedTagServiceServer) AddNews(context.Context, *News) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNews not implemented")
+}
+func (UnimplementedTagServiceServer) EditNews(context.Context, *News) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditNews not implemented")
+}
+func (UnimplementedTagServiceServer) DeleteNews(context.Context, *Select) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNews not implemented")
+}
+func (UnimplementedTagServiceServer) GetNewses(context.Context, *emptypb.Empty) (*Newses, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNewses not implemented")
 }
 
 // UnsafeTagServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -307,6 +363,78 @@ func _TagService_GetTopics_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TagService_AddNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(News)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).AddNews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/AddNews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).AddNews(ctx, req.(*News))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_EditNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(News)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).EditNews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/EditNews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).EditNews(ctx, req.(*News))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_DeleteNews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Select)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).DeleteNews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/DeleteNews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).DeleteNews(ctx, req.(*Select))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagService_GetNewses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagServiceServer).GetNewses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.v1.TagService/GetNewses",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagServiceServer).GetNewses(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TagService_ServiceDesc is the grpc.ServiceDesc for TagService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -345,6 +473,22 @@ var TagService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTopics",
 			Handler:    _TagService_GetTopics_Handler,
+		},
+		{
+			MethodName: "AddNews",
+			Handler:    _TagService_AddNews_Handler,
+		},
+		{
+			MethodName: "EditNews",
+			Handler:    _TagService_EditNews_Handler,
+		},
+		{
+			MethodName: "DeleteNews",
+			Handler:    _TagService_DeleteNews_Handler,
+		},
+		{
+			MethodName: "GetNewses",
+			Handler:    _TagService_GetNewses_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

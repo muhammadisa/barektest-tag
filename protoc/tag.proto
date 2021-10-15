@@ -18,6 +18,16 @@ message Topic {
   int64 updated_at = 5;
 }
 
+message News {
+  string id = 1;
+  string topic_id = 2;
+  string title = 3;
+  string content = 4;
+  int32 status = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
+}
+
 message Select {
   string id = 1;
 }
@@ -30,6 +40,10 @@ message Topics{
   repeated Topic topics = 1;
 }
 
+message Newses{
+  repeated News newses = 1;
+}
+
 service TagService {
   rpc AddTag(Tag) returns (google.protobuf.Empty);
   rpc EditTag(Tag) returns (google.protobuf.Empty);
@@ -40,4 +54,9 @@ service TagService {
   rpc EditTopic(Topic) returns (google.protobuf.Empty);
   rpc DeleteTopic(Select) returns (google.protobuf.Empty);
   rpc GetTopics(google.protobuf.Empty) returns (Topics);
+
+  rpc AddNews(News) returns (google.protobuf.Empty);
+  rpc EditNews(News) returns (google.protobuf.Empty);
+  rpc DeleteNews(Select) returns (google.protobuf.Empty);
+  rpc GetNewses(google.protobuf.Empty) returns (Newses);
 }

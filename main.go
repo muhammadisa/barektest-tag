@@ -17,7 +17,6 @@ import (
 	"github.com/muhammadisa/barektest-util/dbc"
 	"github.com/muhammadisa/barektest-util/hdr"
 	"github.com/muhammadisa/barektest-util/lgr"
-	"github.com/muhammadisa/barektest-util/vlt"
 	"github.com/openzipkin/zipkin-go"
 	httpreporter "github.com/openzipkin/zipkin-go/reporter/http"
 	"github.com/soheilhy/cmux"
@@ -86,12 +85,7 @@ func main() {
 	ctx := context.Background()
 	defer ctx.Done()
 
-	vault, err := vlt.NewVLT("myroot", "http://localhost:8300", "/secret")
-	if err != nil {
-		panic(err)
-	}
-
-	reporter := httpreporter.NewReporter(vault.Get("/tracer_conf:url"))
+	reporter := httpreporter.NewReporter("http://localhost:9411/api/v2/spans")
 	localEndpoint, _ := zipkin.NewEndpoint(constant.ServiceName, ":0")
 	exporter := oczipkin.NewExporter(reporter, localEndpoint)
 	trace.ApplyConfig(trace.Config{DefaultSampler: trace.AlwaysSample()})
@@ -101,11 +95,11 @@ func main() {
 	var repoConf repository.RepoConf
 	{
 		repoConf.SQL = dbc.Config{
-			Username: vault.Get("/sql_database:username"),
-			Password: vault.Get("/sql_database:password"),
-			Host:     vault.Get("/sql_database:host"),
-			Port:     vault.Get("/sql_database:port"),
-			Name:     vault.Get("/sql_database:db"),
+			Username: "root",
+			Password: "root",
+			Host:     "localhost",
+			Port:     "3306",
+			Name:     "news_bareksa",
 		}
 		repoConf.Cache = dbc.Config{
 			Password: "95798588",
@@ -124,9 +118,9 @@ func main() {
 		panic(err)
 	}
 
-	tagSvc := service.NewUsecases(*tagRepo, trcr, vault)
+	tagSvc := service.NewUsecases(*tagRepo, trcr)
 
-	tagEp, err := ep.NewTagEndpoint(tagSvc, gvars.Log, vault)
+	tagEp, err := ep.NewTagEndpoint(tagSvc, gvars.Log)
 	if err != nil {
 		panic(err)
 	}

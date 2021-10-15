@@ -47,6 +47,46 @@
         }
       }
     },
+    "v1News": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "topicId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1Newses": {
+      "type": "object",
+      "properties": {
+        "newses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1News"
+          }
+        }
+      }
+    },
     "v1Tag": {
       "type": "object",
       "properties": {

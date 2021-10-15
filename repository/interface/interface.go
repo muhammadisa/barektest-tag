@@ -15,6 +15,11 @@ type ReadWrite interface {
 	ModifyTopic(ctx context.Context, req *pb.Topic) (*pb.Topic, error)
 	RemoveTopic(ctx context.Context, req *pb.Select) error
 	ReadTopics(ctx context.Context) (*pb.Topics, error)
+
+	WriteNews(ctx context.Context, req *pb.News) (*pb.News, error)
+	ModifyNews(ctx context.Context, req *pb.News) (*pb.News, error)
+	RemoveNews(ctx context.Context, req *pb.Select) error
+	ReadNewses(ctx context.Context) (*pb.Newses, error)
 }
 
 type Cache interface {
@@ -26,5 +31,10 @@ type Cache interface {
 	SetTopic(ctx context.Context, tag *pb.Topic) error
 	UnsetTopic(ctx context.Context, id string) error
 	GetTopics(ctx context.Context) (*pb.Topics, error)
-	ReloadTopics(ctx context.Context, tags *pb.Topics) error
+	ReloadTopics(ctx context.Context, topics *pb.Topics) error
+
+	SetNews(ctx context.Context, tag *pb.News) error
+	UnsetNews(ctx context.Context, id string) error
+	GetNewses(ctx context.Context) (*pb.News, error)
+	ReloadNewses(ctx context.Context, newses *pb.Newses) error
 }

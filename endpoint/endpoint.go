@@ -7,7 +7,6 @@ import (
 	"github.com/muhammadisa/barektest-tag/constant"
 	_interface "github.com/muhammadisa/barektest-tag/service/interface"
 	"github.com/muhammadisa/barektest-util/mw"
-	"github.com/muhammadisa/barektest-util/vlt"
 )
 
 type TagEndpoint struct {
@@ -21,7 +20,7 @@ type TagEndpoint struct {
 	GetTopicsEndpoint   endpoint.Endpoint
 }
 
-func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger, vault vlt.VLT) (TagEndpoint, error) {
+func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger) (TagEndpoint, error) {
 	var addTagEp endpoint.Endpoint
 	{
 		const name = `AddTag`

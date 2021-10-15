@@ -1,7 +1,7 @@
 package constant
 
 const (
-	ServiceName = `tag`
+	ServiceName = `news`
 )
 
 const(

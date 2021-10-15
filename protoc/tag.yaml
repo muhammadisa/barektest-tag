@@ -23,3 +23,14 @@ http:
       delete: /v1/topic/{id}
     - selector: api.v1.TagService.GetTopics
       get: /v1/topics
+
+    - selector: api.v1.TagService.AddNews
+      post: /v1/news
+      body: "*"
+    - selector: api.v1.TagService.EditNews
+      put: /v1/news/{id}
+      body: "*"
+    - selector: api.v1.TagService.DeleteNews
+      delete: /v1/news/{id}
+    - selector: api.v1.TagService.GetNewses
+      get: /v1/newses
