@@ -35,6 +35,6 @@ type Cache interface {
 
 	SetNews(ctx context.Context, tag *pb.News) error
 	UnsetNews(ctx context.Context, id string) error
-	GetNewses(ctx context.Context) (*pb.News, error)
+	GetNewses(ctx context.Context) (*pb.Newses, error)
 	ReloadNewses(ctx context.Context, newses *pb.Newses) error
 }
