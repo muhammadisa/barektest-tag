@@ -46,14 +46,14 @@ func (s service) DeleteNews(ctx context.Context, selectNews *pb.Select) (res *em
 }
 
 func (s service) GetNewses(ctx context.Context, filters *pb.Filters) (res *pb.Newses, err error) {
+	if filters.TopicId != "" && filters.Status != 0 {
+		return s.repo.ReadWriter.ReadNewsesByStatusAndTopicID(ctx, filters.Status, filters.TopicId)
+	}
 	if filters.Status != 0 {
 		return s.repo.ReadWriter.ReadNewsesByStatus(ctx, filters.Status)
 	}
 	if filters.TopicId != "" {
 		return s.repo.ReadWriter.ReadNewsesByTopicID(ctx, filters.TopicId)
-	}
-	if filters.TopicId != "" && filters.Status != 0 {
-		return s.repo.ReadWriter.ReadNewsesByStatusAndTopicID(ctx, filters.Status, filters.TopicId)
 	}
 	return s.repo.ReadWriter.ReadNewses(ctx)
 }

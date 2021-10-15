@@ -4,7 +4,7 @@ const (
 	queryWriteBulkNewsTags            = `INSERT INTO news_tags(id, news_id, tag_id, created_at, updated_at) VALUES %s`
 	queryReadNewsTags                 = `SELECT news_tags.tag_id, tags.tag FROM news_tags LEFT JOIN tags ON tags.id = news_tags.tag_id WHERE news_tags.news_id = ?`
 	queryLookupCreateAtNews           = `SELECT id, created_at FROM news WHERE id = ?`
-	queryReadNewses                   = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE status = 1 ORDER BY created_at DESC`
+	queryReadNewses                   = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news ORDER BY created_at DESC`
 	queryReadNewsesByStatus           = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE status = ? ORDER BY created_at DESC`
 	queryReadNewsesByTopicID          = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE topic_id = ? AND status = 1 ORDER BY created_at DESC`
 	queryReadNewsesByStatusAndTopicID = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE topic_id = ? AND status = ? ORDER BY created_at DESC`
