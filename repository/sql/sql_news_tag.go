@@ -29,8 +29,8 @@ func (r *readWrite) ReadNewsTagsTagIDAndTagByNewsID(ctx context.Context, newsID 
 			return nil
 		}
 		if all {
-			res = append(res, fmt.Sprintf("%s:%s", tagID, tag))
-		}else{
+			res = append(res, tag)
+		} else {
 			res = append(res, tagID)
 		}
 	}

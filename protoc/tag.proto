@@ -35,10 +35,8 @@ message Select {
 }
 
 message Filters {
-  string args_1 = 1;
-  string args_2 = 2;
-  string args_3 = 3;
-  string args_4 = 4;
+  int32 status = 1;
+  string topic_id = 2;
 }
 
 message Tags {

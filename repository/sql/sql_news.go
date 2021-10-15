@@ -98,20 +98,9 @@ func (r *readWrite) RemoveNews(ctx context.Context, req *pb.Select) error {
 	return nil
 }
 
-func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) {
+func (r *readWrite) rowsNewsesNextAndScan(ctx context.Context, row *sql.Rows) (res *pb.Newses, err error) {
 	var newses pb.Newses
 	var news model.News
-
-	stmt, err := r.db.Prepare(queryReadNewses)
-	if err != nil {
-		return res, err
-	}
-	mutex.Lock()
-	row, err := stmt.QueryContext(ctx)
-	if err != nil {
-		return res, err
-	}
-	mutex.Unlock()
 	for row.Next() {
 		err = row.Scan(
 			&news.ID,      // id
@@ -139,4 +128,60 @@ func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) 
 		})
 	}
 	return &newses, nil
+}
+
+func (r *readWrite) ReadNewsesByStatusAndTopicID(ctx context.Context, status int32, topicID string) (res *pb.Newses, err error) {
+	stmt, err := r.db.Prepare(queryReadNewsesByStatusAndTopicID)
+	if err != nil {
+		return res, err
+	}
+	mutex.Lock()
+	row, err := stmt.QueryContext(ctx, topicID, status)
+	if err != nil {
+		return res, err
+	}
+	mutex.Unlock()
+	return r.rowsNewsesNextAndScan(ctx, row)
+}
+
+func (r *readWrite) ReadNewsesByTopicID(ctx context.Context, topicID string) (res *pb.Newses, err error) {
+	stmt, err := r.db.Prepare(queryReadNewsesByTopicID)
+	if err != nil {
+		return res, err
+	}
+	mutex.Lock()
+	row, err := stmt.QueryContext(ctx, topicID)
+	if err != nil {
+		return res, err
+	}
+	mutex.Unlock()
+	return r.rowsNewsesNextAndScan(ctx, row)
+}
+
+func (r *readWrite) ReadNewsesByStatus(ctx context.Context, status int32) (res *pb.Newses, err error) {
+	stmt, err := r.db.Prepare(queryReadNewsesByStatus)
+	if err != nil {
+		return res, err
+	}
+	mutex.Lock()
+	row, err := stmt.QueryContext(ctx, status)
+	if err != nil {
+		return res, err
+	}
+	mutex.Unlock()
+	return r.rowsNewsesNextAndScan(ctx, row)
+}
+
+func (r *readWrite) ReadNewses(ctx context.Context) (res *pb.Newses, err error) {
+	stmt, err := r.db.Prepare(queryReadNewses)
+	if err != nil {
+		return res, err
+	}
+	mutex.Lock()
+	row, err := stmt.QueryContext(ctx)
+	if err != nil {
+		return res, err
+	}
+	mutex.Unlock()
+	return r.rowsNewsesNextAndScan(ctx, row)
 }
