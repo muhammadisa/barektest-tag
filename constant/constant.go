@@ -18,4 +18,7 @@ const (
 
 	// News redis key
 	News = `news`
+
+	// ReloadNewses redis key
+	ReloadNewses = `reload_newses`
 )

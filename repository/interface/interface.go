@@ -24,7 +24,9 @@ type ReadWrite interface {
 	ReadNewsesByTopicID(ctx context.Context, topicID string) (*pb.Newses, error)
 	ReadNewsesByStatusAndTopicID(ctx context.Context, status int32, topicID string) (*pb.Newses, error)
 
+	RemoveNewsTagsByNewsID(ctx context.Context, req *pb.Select) error
 	WriteNewsTags(ctx context.Context, newsID string, tagIDs []string) error
+	ReadNewsTagsTagIDAndTagByNewsID(ctx context.Context, newsID string, all bool) (res []string)
 }
 
 type Cache interface {
@@ -38,8 +40,9 @@ type Cache interface {
 	GetTopics(ctx context.Context) (*pb.Topics, error)
 	ReloadTopics(ctx context.Context, topics *pb.Topics) error
 
-	SetNews(ctx context.Context, tag *pb.News) error
+	InvalidateNewses(ctx context.Context) error
+	ReloadRequired(ctx context.Context) bool
 	UnsetNews(ctx context.Context, id string) error
-	GetNewses(ctx context.Context) (*pb.Newses, error)
+	GetNewses(ctx context.Context) (res *pb.Newses, err error)
 	ReloadNewses(ctx context.Context, newses *pb.Newses) error
 }

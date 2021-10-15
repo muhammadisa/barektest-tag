@@ -3,10 +3,29 @@ package sql
 import (
 	"context"
 	"fmt"
+	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 	uuid "github.com/satori/go.uuid"
 	"strings"
 	"time"
 )
+
+func (r *readWrite) RemoveNewsTagsByNewsID(ctx context.Context, req *pb.Select) error {
+	stmt, err := r.db.Prepare(queryRemoveNewsTagsByNewsID)
+	if err != nil {
+		return err
+	}
+	result, err := stmt.ExecContext(
+		ctx,
+		req.Id, // id
+	)
+	if err != nil {
+		return err
+	}
+	if affected, err := result.RowsAffected(); affected == 0 || err != nil {
+		return fmt.Errorf("failed to delete reason : %+v", err)
+	}
+	return nil
+}
 
 func (r *readWrite) ReadNewsTagsTagIDAndTagByNewsID(ctx context.Context, newsID string, all bool) (res []string) {
 	var tagID, tag string
@@ -43,6 +62,11 @@ func (r *readWrite) WriteNewsTags(ctx context.Context, newsID string, tagIDs []s
 
 	if length < 0 {
 		return nil
+	}
+
+	err := r.RemoveNewsTagsByNewsID(ctx, &pb.Select{Id: newsID})
+	if err != nil {
+		return err
 	}
 
 	var valueStrings []string

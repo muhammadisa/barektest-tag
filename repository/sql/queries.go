@@ -3,6 +3,7 @@ package sql
 const (
 	queryWriteBulkNewsTags            = `INSERT INTO news_tags(id, news_id, tag_id, created_at, updated_at) VALUES %s`
 	queryReadNewsTags                 = `SELECT news_tags.tag_id, tags.tag FROM news_tags LEFT JOIN tags ON tags.id = news_tags.tag_id WHERE news_tags.news_id = ?`
+	queryRemoveNewsTagsByNewsID       = `DELETE FROM news_tags WHERE news_id = ?`
 	queryLookupCreateAtNews           = `SELECT id, created_at FROM news WHERE id = ?`
 	queryReadNewses                   = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news ORDER BY created_at DESC`
 	queryReadNewsesByStatus           = `SELECT id, topic_id, title, content, status, created_at, updated_at FROM news WHERE status = ? ORDER BY created_at DESC`

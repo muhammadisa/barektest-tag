@@ -7,22 +7,10 @@ import (
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
 )
 
-func (c *cache) SetNews(ctx context.Context, news *pb.News) (err error) {
-	newsByte, err := json.Marshal(news)
-	if err != nil {
-		return err
-	}
-	return c.redis.HSetNX(ctx, constant.News, news.Id, string(newsByte)).Err()
-}
-
-func (c *cache) UnsetNews(ctx context.Context, id string) (err error) {
-	return c.redis.HDel(ctx, constant.News, id).Err()
-}
-
 func (c *cache) GetNewses(ctx context.Context) (res *pb.Newses, err error) {
 	var newses pb.Newses
-	newsesMap := c.redis.HGetAll(ctx, constant.News).Val()
-	for _, v := range newsesMap {
+	tagsMap := c.redis.HGetAll(ctx, constant.News).Val()
+	for _, v := range tagsMap {
 		var news pb.News
 		err = json.Unmarshal([]byte(v), &news)
 		if err != nil {
@@ -30,7 +18,25 @@ func (c *cache) GetNewses(ctx context.Context) (res *pb.Newses, err error) {
 		}
 		newses.Newses = append(newses.Newses, &news)
 	}
+	c.redis.Set(ctx, constant.ReloadNewses, false, 0)
 	return &newses, nil
+}
+
+func (c *cache) UnsetNews(ctx context.Context, id string) error {
+	return c.redis.HDel(ctx, constant.News, id).Err()
+}
+
+func (c *cache) InvalidateNewses(ctx context.Context) error {
+	return c.redis.Set(ctx, constant.ReloadNewses, true, 0).Err()
+}
+
+func (c *cache) ReloadRequired(ctx context.Context) bool {
+	state := c.redis.Get(ctx, constant.ReloadNewses).Val()
+	if state != "0" {
+		return true
+	} else {
+		return false
+	}
 }
 
 func (c *cache) ReloadNewses(ctx context.Context, newses *pb.Newses) (err error) {
@@ -42,6 +48,6 @@ func (c *cache) ReloadNewses(ctx context.Context, newses *pb.Newses) (err error)
 		}
 		data[news.Id] = string(newsByte)
 	}
+	c.redis.Set(ctx, constant.ReloadNewses, false, 0)
 	return c.redis.HMSet(ctx, constant.News, data).Err()
 }
-
