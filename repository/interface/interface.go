@@ -41,8 +41,11 @@ type Cache interface {
 	ReloadTopics(ctx context.Context, topics *pb.Topics) error
 
 	InvalidateNewses(ctx context.Context) error
-	ReloadRequired(ctx context.Context) bool
+	ReloadRequired(ctx context.Context, filter string) bool
 	UnsetNews(ctx context.Context, id string) error
 	GetNewses(ctx context.Context) (res *pb.Newses, err error)
 	ReloadNewses(ctx context.Context, newses *pb.Newses) error
+
+	GetFilter(ctx context.Context) string
+	SetFilter(ctx context.Context, filter string) error
 }

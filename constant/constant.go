@@ -21,4 +21,7 @@ const (
 
 	// ReloadNewses redis key
 	ReloadNewses = `reload_newses`
+
+	// FilterNewses redis key
+	FilterNewses = `filter_newses`
 )

@@ -42,87 +42,44 @@ func (s service) DeleteNews(ctx context.Context, selectNews *pb.Select) (res *em
 	return nil, s.repo.CacheReadWriter.InvalidateNewses(ctx)
 }
 
-func (s service) noneFilter(ctx context.Context) (res *pb.Newses, err error) {
-	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx); reload {
-		fmt.Println("none - reload")
-		res, err = s.repo.ReadWriter.ReadNewses(ctx)
-		if err != nil {
-			return nil, err
-		}
-		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
-		if err != nil {
-			return nil, err
-		}
-		return res, nil
-	} else {
-		fmt.Println("none - no reload")
-		return s.repo.CacheReadWriter.GetNewses(ctx)
+func filter(filters *pb.Filters) (res string) {
+	if filters.TopicId == "" && filters.Status == 0 {
+		res = "none"
 	}
-}
-
-func (s service) statusFilter(ctx context.Context, status int32) (res *pb.Newses, err error) {
-	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx); reload {
-		fmt.Println("status - reload")
-		res, err = s.repo.ReadWriter.ReadNewsesByStatus(ctx, status)
-		if err != nil {
-			return nil, err
-		}
-		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
-		if err != nil {
-			return nil, err
-		}
-		return res, nil
-	} else {
-		fmt.Println("status - no reload")
-		return s.repo.CacheReadWriter.GetNewses(ctx)
+	if filters.TopicId != "" && filters.Status != 0 {
+		res = fmt.Sprintf("topic_id_status_%s_%d", filters.TopicId, filters.Status)
 	}
-}
-
-func (s service) topicIdFilter(ctx context.Context, topicID string) (res *pb.Newses, err error) {
-	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx); reload {
-		fmt.Println("topic_id - reload")
-		res, err = s.repo.ReadWriter.ReadNewsesByTopicID(ctx, topicID)
-		if err != nil {
-			return nil, err
-		}
-		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
-		if err != nil {
-			return nil, err
-		}
-		return res, nil
-	} else {
-		fmt.Println("topic_id - no reload")
-		return s.repo.CacheReadWriter.GetNewses(ctx)
+	if filters.Status != 0 {
+		res = fmt.Sprintf("status_%d", filters.Status)
 	}
-}
-
-func (s service) statusAndTopicIdFilter(ctx context.Context, filters *pb.Filters) (res *pb.Newses, err error) {
-	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx); reload {
-		fmt.Println("status topic_id - reload")
-		res, err = s.repo.ReadWriter.ReadNewsesByStatusAndTopicID(ctx, filters.Status, filters.TopicId)
-		if err != nil {
-			return nil, err
-		}
-		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
-		if err != nil {
-			return nil, err
-		}
-		return res, nil
-	} else {
-		fmt.Println("status topic_id - no reload")
-		return s.repo.CacheReadWriter.GetNewses(ctx)
+	if filters.TopicId != "" {
+		res = fmt.Sprintf("topic_id_%s", filters.TopicId)
 	}
+	return
 }
 
 func (s service) GetNewses(ctx context.Context, filters *pb.Filters) (res *pb.Newses, err error) {
-	if filters.TopicId != "" && filters.Status != 0 {
-		return s.statusAndTopicIdFilter(ctx, filters)
+	filterValue := filter(filters)
+	if reload := s.repo.CacheReadWriter.ReloadRequired(ctx, filterValue); reload {
+		_ = s.repo.CacheReadWriter.SetFilter(ctx, filterValue)
+		if filters.TopicId == "" && filters.Status == 0 {
+			res, err = s.repo.ReadWriter.ReadNewses(ctx)
+		}
+		if filters.TopicId != "" && filters.Status != 0 {
+			res, err = s.repo.ReadWriter.ReadNewsesByStatusAndTopicID(ctx, filters.Status, filters.TopicId)
+		}
+		if filters.Status != 0 {
+			res, err = s.repo.ReadWriter.ReadNewsesByStatus(ctx, filters.Status)
+		}
+		if filters.TopicId != "" {
+			res, err = s.repo.ReadWriter.ReadNewsesByTopicID(ctx, filters.TopicId)
+		}
+		err = s.repo.CacheReadWriter.ReloadNewses(ctx, res)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
+	} else {
+		return s.repo.CacheReadWriter.GetNewses(ctx)
 	}
-	if filters.Status != 0 {
-		return s.statusFilter(ctx, filters.Status)
-	}
-	if filters.TopicId != "" {
-		return s.topicIdFilter(ctx, filters.TopicId)
-	}
-	return s.noneFilter(ctx)
 }
