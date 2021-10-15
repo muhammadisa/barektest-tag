@@ -62,6 +62,18 @@
         "content": {
           "type": "string"
         },
+        "newsTagIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "newsTagNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "status": {
           "type": "integer",
           "format": "int32"
