@@ -63,37 +63,37 @@ func NewTagEndpoint(tagSvc _interface.Service, logger logger.Logger, vault vlt.V
 	var addTopicEp endpoint.Endpoint
 	{
 		const name = `AddTopic`
-		addTagEp = makeAddTagEndpoint(tagSvc)
-		addTagEp = mw.LoggingMiddleware(logger)(addTagEp)
-		addTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(addTagEp)
-		addTagEp = kitoc.TraceEndpoint(name)(addTagEp)
+		addTopicEp = makeAddTopicEndpoint(tagSvc)
+		addTopicEp = mw.LoggingMiddleware(logger)(addTopicEp)
+		addTopicEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(addTopicEp)
+		addTopicEp = kitoc.TraceEndpoint(name)(addTopicEp)
 	}
 
 	var editTopicEp endpoint.Endpoint
 	{
 		const name = `EditTopic`
-		editTagEp = makeEditTagEndpoint(tagSvc)
-		editTagEp = mw.LoggingMiddleware(logger)(editTagEp)
-		editTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(editTagEp)
-		editTagEp = kitoc.TraceEndpoint(name)(editTagEp)
+		editTopicEp = makeEditTopicEndpoint(tagSvc)
+		editTopicEp = mw.LoggingMiddleware(logger)(editTopicEp)
+		editTopicEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(editTopicEp)
+		editTopicEp = kitoc.TraceEndpoint(name)(editTopicEp)
 	}
 
 	var deleteTopicEp endpoint.Endpoint
 	{
 		const name = `DeleteTopic`
-		deleteTagEp = makeDeleteTagEndpoint(tagSvc)
-		deleteTagEp = mw.LoggingMiddleware(logger)(deleteTagEp)
-		deleteTagEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(deleteTagEp)
-		deleteTagEp = kitoc.TraceEndpoint(name)(deleteTagEp)
+		deleteTopicEp = makeDeleteTopicEndpoint(tagSvc)
+		deleteTopicEp = mw.LoggingMiddleware(logger)(deleteTopicEp)
+		deleteTopicEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(deleteTopicEp)
+		deleteTopicEp = kitoc.TraceEndpoint(name)(deleteTopicEp)
 	}
 
 	var getTopicsEp endpoint.Endpoint
 	{
 		const name = `DeleteTopic`
-		getTagsEp = makeGetTagsEndpoint(tagSvc)
-		getTagsEp = mw.LoggingMiddleware(logger)(getTagsEp)
-		getTagsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(getTagsEp)
-		getTagsEp = kitoc.TraceEndpoint(name)(getTagsEp)
+		getTopicsEp = makeGetTopicsEndpoint(tagSvc)
+		getTopicsEp = mw.LoggingMiddleware(logger)(getTopicsEp)
+		getTopicsEp = mw.CircuitBreakerMiddleware(constant.ServiceName)(getTopicsEp)
+		getTopicsEp = kitoc.TraceEndpoint(name)(getTopicsEp)
 	}
 
 	return TagEndpoint{

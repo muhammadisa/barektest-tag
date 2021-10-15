@@ -14,7 +14,46 @@ type grpcTagServer struct {
 	editTag   grpctransport.Handler
 	deleteTag grpctransport.Handler
 	getTags   grpctransport.Handler
+
+	addTopic    grpctransport.Handler
+	editTopic   grpctransport.Handler
+	deleteTopic grpctransport.Handler
+	getTopics   grpctransport.Handler
 }
+
+func (g grpcTagServer) AddTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
+	_, res, err := g.addTopic.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) EditTopic(ctx context.Context, req *pb.Topic) (*emptypb.Empty, error) {
+	_, res, err := g.editTopic.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) DeleteTopic(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
+	_, res, err := g.deleteTopic.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*emptypb.Empty), nil
+}
+
+func (g grpcTagServer) GetTopics(ctx context.Context, req *emptypb.Empty) (*pb.Topics, error) {
+	_, res, err := g.getTopics.ServeGRPC(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return res.(*pb.Topics), nil
+}
+
+// ..
 
 func (g grpcTagServer) AddTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty, error) {
 	_, res, err := g.addTag.ServeGRPC(ctx, req)
@@ -32,7 +71,6 @@ func (g grpcTagServer) EditTag(ctx context.Context, req *pb.Tag) (*emptypb.Empty
 	return res.(*emptypb.Empty), nil
 }
 
-//goland:noinspection Annotator
 func (g grpcTagServer) DeleteTag(ctx context.Context, req *pb.Select) (*emptypb.Empty, error) {
 	_, res, err := g.deleteTag.ServeGRPC(ctx, req)
 	if err != nil {
@@ -74,6 +112,31 @@ func NewTagServer(endpoints ep.TagEndpoint) pb.TagServiceServer {
 		),
 		getTags: grpctransport.NewServer(
 			endpoints.GetTagsEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		//..
+		addTopic: grpctransport.NewServer(
+			endpoints.AddTopicEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		editTopic: grpctransport.NewServer(
+			endpoints.EditTopicEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		deleteTopic: grpctransport.NewServer(
+			endpoints.DeleteTopicEndpoint,
+			decodeRequest,
+			encodeResponse,
+			options...,
+		),
+		getTopics: grpctransport.NewServer(
+			endpoints.GetTopicsEndpoint,
 			decodeRequest,
 			encodeResponse,
 			options...,

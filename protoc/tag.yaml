@@ -12,3 +12,14 @@ http:
       delete: /v1/tag/{id}
     - selector: api.v1.TagService.GetTags
       get: /v1/tags
+
+    - selector: api.v1.TagService.AddTopic
+      post: /v1/topic
+      body: "*"
+    - selector: api.v1.TagService.EditTopic
+      put: /v1/topic/{id}
+      body: "*"
+    - selector: api.v1.TagService.DeleteTopic
+      delete: /v1/topic/{id}
+    - selector: api.v1.TagService.GetTopics
+      get: /v1/topics
