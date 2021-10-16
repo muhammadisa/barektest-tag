@@ -6,13 +6,11 @@ import (
 	"fmt"
 	"github.com/muhammadisa/barektest-tag/model"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
-	uuid "github.com/satori/go.uuid"
 	"time"
 )
 
 func (r *readWrite) WriteTag(ctx context.Context, req *pb.Tag) (res *pb.Tag, err error) {
 	currentTime := time.Now()
-	req.Id = uuid.NewV4().String()
 	req.CreatedAt = currentTime.Unix()
 	req.UpdatedAt = currentTime.Unix()
 	stmt, err := r.db.Prepare(queryWriteTag)

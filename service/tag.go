@@ -4,10 +4,12 @@ import (
 	"context"
 	"fmt"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
+	uuid "github.com/satori/go.uuid"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func (s service) AddTag(ctx context.Context, tag *pb.Tag) (res *emptypb.Empty, err error) {
+	tag.Id = uuid.NewV4().String()
 	newTag, err := s.repo.ReadWriter.WriteTag(ctx, tag)
 	if err != nil {
 		return nil, err
