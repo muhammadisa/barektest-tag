@@ -4,10 +4,12 @@ import (
 	"context"
 	"fmt"
 	pb "github.com/muhammadisa/barektest-tag/protoc/api/v1"
+	uuid "github.com/satori/go.uuid"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func (s service) AddTopic(ctx context.Context, topic *pb.Topic) (*emptypb.Empty, error) {
+	topic.Id = uuid.NewV4().String()
 	newTopic, err := s.repo.ReadWriter.WriteTopic(ctx, topic)
 	if err != nil {
 		return nil, err

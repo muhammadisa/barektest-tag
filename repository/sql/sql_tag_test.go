@@ -149,6 +149,84 @@ func (ts *sqlTagTestSuite) TestRemoveTag() {
 	}
 }
 
+func (ts *sqlTagTestSuite) TestModifyTag() {
+	// sql mock
+	mockDB, mock, err := mocker.SQLMocker()
+	ts.Require().NoError(err)
+	ts.Require().NotNil(mockDB)
+	ts.Require().NotNil(mock)
+
+	now := time.Now()
+
+	// test case
+	tests := []struct {
+		Name      string
+		Request   *pb.Tag
+		WantError bool
+	}{
+		{
+			Name: "modify tag success",
+			Request: &pb.Tag{
+				Id:  uuid.NewV4().String(),
+				Tag: "health",
+			},
+			WantError: false,
+		},
+		{
+			Name: "modify tag failed",
+			Request: &pb.Tag{
+				Id:  uuid.NewV4().String(),
+				Tag: "health",
+			},
+			WantError: true,
+		},
+	}
+
+	repository := &readWrite{db: mockDB}
+	errorDummy := errors.New("sql error while executing query")
+	currentDate := mocker.AnyTime{}
+	ctx := context.Background()
+	defer ctx.Done()
+
+	for _, test := range tests {
+		ts.Run(test.Name, func() {
+			if !test.WantError {
+				mock.ExpectPrepare(queryLookupCreateAtTag)
+				mock.ExpectQuery(queryLookupCreateAtTag).
+					WithArgs(test.Request.Id).
+					WillReturnRows(sqlmock.NewRows([]string{"id", "created_at"}).
+						AddRow(test.Request.Id, now))
+				mock.ExpectPrepare(queryUpdateTag)
+				mock.ExpectExec(queryUpdateTag).
+					WithArgs(test.Request.Tag, currentDate, currentDate, test.Request.Id).
+					WillReturnResult(sqlmock.NewResult(1, 1))
+
+				updatedTag, err := repository.ModifyTag(ctx, test.Request)
+				ts.Assert().NoError(err)
+				ts.Assert().NotEqual(updatedTag, &pb.Tag{})
+				ts.Assert().Equal(updatedTag.Id, test.Request.Id)
+				ts.Assert().Equal(updatedTag.Tag, test.Request.Tag)
+
+				err = mock.ExpectationsWereMet()
+				ts.Assert().NoError(err)
+			} else {
+				mock.ExpectPrepare(queryLookupCreateAtTag)
+				mock.ExpectQuery(queryLookupCreateAtTag).
+					WillReturnError(errorDummy)
+				mock.ExpectPrepare(queryUpdateTag)
+				mock.ExpectExec(queryUpdateTag).
+					WillReturnError(errorDummy)
+
+				_, err := repository.ModifyTag(ctx, test.Request)
+				ts.Assert().Error(err)
+
+				err = mock.ExpectationsWereMet()
+				ts.Assert().Error(err)
+			}
+		})
+	}
+}
+
 func (ts *sqlTagTestSuite) TestWriteTag() {
 	// sql mock
 	mockDB, mock, err := mocker.SQLMocker()
